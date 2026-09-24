@@ -1,7 +1,7 @@
 package modelo.cartas;
 
 public enum TipoAtaque {
-    MELEE,
-    RANGED,
-    SIEGE
+    CUERPO_A_CUERPO,
+    DISTANCIA,
+    ASEDIO
 }

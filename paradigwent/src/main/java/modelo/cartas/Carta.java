@@ -1,7 +1,7 @@
 package modelo.cartas;
 
 public abstract class Carta {
-    private String nombre;
+    private final String nombre;
 
     public Carta(String nombre) {
         this.nombre = nombre;
