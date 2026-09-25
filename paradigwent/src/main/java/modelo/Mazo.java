@@ -1,6 +1,6 @@
-package modelo.cartas;
+package modelo;
 
-import modelo.Faccion;
+import modelo.cartas.Carta;
 
 import java.util.ArrayList;
 import java.util.List;
