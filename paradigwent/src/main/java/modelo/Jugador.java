@@ -1,8 +1,6 @@
 package modelo;
 
 import modelo.cartas.Carta;
-import modelo.cartas.Mazo;
-
 import java.util.ArrayList;
 import java.util.List;
 
