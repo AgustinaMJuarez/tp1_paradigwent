@@ -24,13 +24,18 @@ public class Ronda {
     }
 
     public boolean estaTerminada() {
-        /* .. */
+        if (jugador.yaPaso() && enemigo.yaPaso()) {
+
+        }
     }
 
     public void finalizar() {
 
     }
 
+    public Jugador determinarGanador(){
+
+    }
 
 }
 

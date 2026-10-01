@@ -7,10 +7,12 @@ public class Partida {
     private final Jugador jugador;
     private final Jugador enemigo;
     private Ronda rondaActual;
+    private final Tablero tablero;
 
     public Partida(Jugador jugador, Jugador enemigo) {
         this.jugador = jugador;
         this.enemigo = enemigo;
+        this.tablero = new Tablero(jugador, enemigo);
     }
 
     public void iniciarPartida() {
