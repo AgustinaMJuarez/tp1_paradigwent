@@ -40,6 +40,9 @@ public class Jugador {
         //..
     }
 
+    public void calcularFuerza() {
+        
+    }
 
 
 }
