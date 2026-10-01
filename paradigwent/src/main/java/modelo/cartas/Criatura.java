@@ -1,5 +1,8 @@
 package modelo.cartas;
 
+import modelo.Jugador;
+import modelo.Tablero;
+
 public class Criatura extends Carta{
     private final int fuerza;
     private final TipoAtaque tipoAtaque;
@@ -16,5 +19,10 @@ public class Criatura extends Carta{
 
     public int getFuerza() {
         return fuerza;
+    }
+
+    @Override
+    public void jugar(Jugador jugador, Tablero tablero) {
+        jugador.agregarCriatura(this);
     }
 }
