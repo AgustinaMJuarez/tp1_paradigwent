@@ -11,8 +11,4 @@ public class Tablero {
         this.jugador = jugador;
         this.enemigo = enemigo;
     }
-
-
-
-
 }
