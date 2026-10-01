@@ -1,0 +1,187 @@
+{
+  "faccion": "CONSTITUCION",
+  "cartas": [
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardia de la Estacion",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Patovica del Anden",
+      "fuerza": 6,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Vendedor Ambulante",
+      "fuerza": 3,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Mecanico Ferroviario",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Inspector",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Obrero del Ferrocarril",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardian del Subte",
+      "fuerza": 6,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Comandante del Anden",
+      "fuerza": 7,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Jefe de Estacion",
+      "fuerza": 8,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Vigia de la Torre",
+      "fuerza": 4,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Francotirador del Anden",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Operador de Senales",
+      "fuerza": 3,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardia Elevado",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Tirador Ferroviario",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Tecnico de Comunicaciones",
+      "fuerza": 4,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Maquinista Veterano",
+      "fuerza": 7,
+      "tipoAtaque": "DISTANCIA"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Canon Ferroviario",
+      "fuerza": 7,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Locomotora Blindada",
+      "fuerza": 8,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Vagon Artillado",
+      "fuerza": 6,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Grua Ferroviaria",
+      "fuerza": 5,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Tren de Guerra",
+      "fuerza": 9,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Mortero del Anden",
+      "fuerza": 7,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Locomotora de Asedio",
+      "fuerza": 9,
+      "tipoAtaque": "ASEDIO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Director de Operaciones",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA",
+      "habilidad": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Locomotora Infernal",
+      "fuerza": 10,
+      "tipoAtaque": "ASEDIO",
+      "habilidad": "QUEMADURA"
+    },
+
+    {
+      "tipo": "CLIMA",
+      "nombre": "Helada en las Vias",
+      "tipoClima": "ESCARCHA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Niebla del Anden",
+      "tipoClima": "NIEBLA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Temporal Ferroviario",
+      "tipoClima": "LLUVIA"
+    },
+
+    {
+      "tipo": "EFECTO",
+      "nombre": "Orden del Jefe de Estacion",
+      "tipoEfecto": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "EFECTO",
+      "nombre": "Descarrilamiento",
+      "tipoEfecto": "QUEMADURA"
+    }
+  ]
+}

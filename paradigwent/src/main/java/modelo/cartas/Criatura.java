@@ -3,11 +3,18 @@ package modelo.cartas;
 public class Criatura extends Carta{
     private final int fuerza;
     private final TipoAtaque tipoAtaque;
+    private final TipoEfecto habilidad;
 
     public Criatura(String nombre, int fuerza, TipoAtaque tipoAtaque) {
+        this(nombre, fuerza, tipoAtaque, null);
+    }
+
+
+    public Criatura(String nombre, int fuerza, TipoAtaque tipoAtaque, TipoEfecto habilidad) {
         super(nombre);
         this.fuerza = fuerza;
         this.tipoAtaque = tipoAtaque;
+        this.habilidad = habilidad;
     }
 
     public TipoAtaque getTipoAtaque() {
@@ -17,4 +24,9 @@ public class Criatura extends Carta{
     public int getFuerza() {
         return fuerza;
     }
+
+    public TipoEfecto getHabilidad() {return habilidad;}
+
+    public boolean tieneHabilidad() { return habilidad != null;}
+
 }
