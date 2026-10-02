@@ -1,0 +1,187 @@
+{
+  "faccion": "BOSQUE",
+  "cartas": [
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guerrero Elfico",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardian del Bosque",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Lobo Salvaje",
+      "fuerza": 3,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Oso Ancestral",
+      "fuerza": 7,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Espadachin Elfico",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Centauro",
+      "fuerza": 6,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Pantera del Bosque",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Ent Guerrero",
+      "fuerza": 8,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardian Ancestral",
+      "fuerza": 7,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Arquero Elfico",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Explorador",
+      "fuerza": 3,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Cazador del Bosque",
+      "fuerza": 4,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Druida",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Arquero Centauro",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Chaman del Roble",
+      "fuerza": 7,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Cazador Nocturno",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Catapulta Elfica",
+      "fuerza": 5,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Trebuchet del Bosque",
+      "fuerza": 6,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Ent Lanzarrocas",
+      "fuerza": 8,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Balista Elfica",
+      "fuerza": 6,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Torre de Espinas",
+      "fuerza": 7,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Lanzador de Troncos",
+      "fuerza": 5,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Arbol de Guerra",
+      "fuerza": 9,
+      "tipoAtaque": "ASEDIO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Druida Supremo",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA",
+      "habilidad": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Dragon del Bosque",
+      "fuerza": 10,
+      "tipoAtaque": "CUERPO_A_CUERPO",
+      "habilidad": "QUEMADURA"
+    },
+
+    {
+      "tipo": "CLIMA",
+      "nombre": "Escarcha Ancestral",
+      "tipoClima": "ESCARCHA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Niebla Encantada",
+      "tipoClima": "NIEBLA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Diluvio del Bosque",
+      "tipoClima": "LLUVIA"
+    },
+
+    {
+      "tipo": "EFECTO",
+      "nombre": "Canto de Guerra",
+      "tipoEfecto": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "EFECTO",
+      "nombre": "Fuego Salvaje",
+      "tipoEfecto": "QUEMADURA"
+    }
+  ]
+}
