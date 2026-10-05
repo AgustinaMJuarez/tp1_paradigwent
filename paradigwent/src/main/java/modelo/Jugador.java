@@ -2,11 +2,7 @@ package modelo;
 
 import modelo.cartas.*;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.*;
 
 public class Jugador {
     private int vidas;
@@ -15,6 +11,7 @@ public class Jugador {
     private final List<Carta> pilaDescarte;
     private final Map<TipoAtaque, List<Criatura>> lineas;
     private boolean paso;
+    private final Set<TipoAtaque> lineasConCuerno;
 
     public Jugador(Mazo mazo) {
         this.vidas = 3;
@@ -23,6 +20,7 @@ public class Jugador {
         this.pilaDescarte = new ArrayList<Carta>();
         this.lineas = new HashMap<>();
         this.paso = false;
+        this.lineasConCuerno = new HashSet<>()
     }
 
     public boolean tieneCarta(Carta carta) {
@@ -47,6 +45,10 @@ public class Jugador {
                 .add(criatura);
     }
 
+    public void agregarEfecto(Efecto efecto) {
+
+    }
+
 
     public void perderVida() {
         this.vidas -= 1;
@@ -56,12 +58,28 @@ public class Jugador {
         return this.vidas == 0;
     }
 
-    public void descartar(Carta carta) {
+    public void descartarCarta(Carta carta) {
       pilaDescarte.add(carta);
+    }
+
+    public void descartarCartasLineas() {
+        for (List<Criatura> listaCriaturas : lineas.values()) {
+            pilaDescarte.addAll(listaCriaturas);
+            listaCriaturas.clear();
+        }
+
     }
 
     public void pasarTurno() {
         paso = true;
+    }
+
+    public void rendirse() {
+        vidas = 0;
+    }
+
+    public void resetearPaso() {
+        paso = false;
     }
 
     public boolean yaPaso() {
@@ -84,6 +102,9 @@ public class Jugador {
             List<Criatura> criaturas = entry.getValue();
 
             for (Criatura criatura : criaturas) {
+                if (criatura instanceof Efecto){
+
+                }
                 if ((climaTablero != null) && (climaTablero.afecta(tipoAtaque))) {
                     fuerza += 1;
                 } else{

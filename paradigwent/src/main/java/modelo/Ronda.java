@@ -8,33 +8,66 @@ public class Ronda {
     private final Tablero tablero;
     private Jugador jugadorActual;
 
-    public Ronda(Jugador jugador, Jugador enemigo, Jugador jugadorActual) {
+    public Ronda(Jugador jugador, Jugador enemigo, Jugador jugadorActual, Tablero tablero) {
         this.jugador = jugador;
         this.enemigo = enemigo;
         this.jugadorActual = jugadorActual;
-        this.tablero = new Tablero(jugador,enemigo);
+        this.tablero = tablero;
     }
 
-    public Carta jugarCarta(Carta carta) {
-        /* .. */
-    }
-
-    public void pasar() {
-        /* .. */
-    }
-
-    public boolean estaTerminada() {
-        if (jugador.yaPaso() && enemigo.yaPaso()) {
-
+    private void cambiarJugador() {
+        if (jugadorActual == jugador) {
+            jugadorActual = enemigo;
+        }else {
+            jugadorActual = jugador;
         }
     }
 
-    public void finalizar() {
-
+    public void jugarCarta(Carta carta){
+        jugadorActual.jugarCarta(carta, tablero);
+        cambiarJugador();
     }
 
-    public Jugador determinarGanador(){
+    public void pasar() {
+        jugadorActual.pasarTurno();
+        cambiarJugador();
+    }
 
+    public boolean estaTerminada() {
+        return jugador.yaPaso() && enemigo.yaPaso();
+    }
+
+
+    public Jugador determinarGanador(){
+        int fuerzaJugador = jugador.calcularFuerza(tablero);
+        int fuerzaEnemigo = enemigo.calcularFuerza(tablero);
+
+        if (fuerzaJugador > fuerzaEnemigo) {
+            return jugador;
+        }
+
+        if (fuerzaEnemigo > fuerzaJugador) {
+            return enemigo;
+        }
+
+        return null;
+    }
+
+    public void finalizar(){
+        Jugador ganador = determinarGanador();
+        if (ganador == jugador) {
+            enemigo.perderVida();
+        } else if (ganador == enemigo) {
+            jugador.perderVida();
+        }else {
+            jugador.perderVida();
+            enemigo.perderVida();
+        }
+        jugador.resetearPaso();
+        enemigo.resetearPaso();
+        jugador.descartarCartasLineas();
+        enemigo.descartarCartasLineas();
+        tablero.limpiarClima();
     }
 
 }

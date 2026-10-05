@@ -1,7 +1,6 @@
 package modelo;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Random;
 
 public class Partida {
     private final Jugador jugador;
@@ -15,8 +14,31 @@ public class Partida {
         this.tablero = new Tablero(jugador, enemigo);
     }
 
-    public void iniciarPartida() {
-        //..
+    private void crearRonda() {
+        Random random = new Random();
+        Jugador jugadorInicial = random.nextBoolean() ? jugador : enemigo;
+        this.rondaActual = new Ronda(jugador, enemigo, jugadorInicial, tablero);
+    }
+
+    public void manejarRondas() {
+        if (this.estaTerminada()){
+            return;
+        }
+
+        if (rondaActual == null) {
+            crearRonda();
+            return;
+        }
+
+        if (rondaActual.estaTerminada()) {
+            rondaActual.finalizar();
+            if (estaTerminada()){
+                return;
+            }
+            crearRonda();
+
+        }
+
     }
 
     public boolean estaTerminada() {
@@ -24,11 +46,12 @@ public class Partida {
     }
 
     public Jugador ganador() {
-        //..
+        if (jugador.estaDerrotado()) {
+            return enemigo;
+        }else{
+            return jugador;
+        }
     }
 
-    public void rendirse() {
-        //..
-    }
 
 }
