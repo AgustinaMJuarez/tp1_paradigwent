@@ -1,6 +1,8 @@
 package modelo;
 
 import modelo.cartas.Carta;
+import modelo.cartas.Efecto;
+import modelo.cartas.TipoAtaque;
 
 public class Ronda {
     private final Jugador jugador;
@@ -25,6 +27,11 @@ public class Ronda {
 
     public void jugarCarta(Carta carta){
         jugadorActual.jugarCarta(carta, tablero);
+        cambiarJugador();
+    }
+
+    public void jugarEfecto(Efecto efecto, Jugador jugadorObjetivo, TipoAtaque tipoAtaque) {
+        jugadorActual.jugarEfecto(efecto, tablero, jugadorObjetivo, tipoAtaque);
         cambiarJugador();
     }
 
@@ -67,7 +74,7 @@ public class Ronda {
         enemigo.resetearPaso();
         jugador.descartarCartasLineas();
         enemigo.descartarCartasLineas();
-        tablero.limpiarClima();
+        tablero.limpiarClimaEfecto();
     }
 
 }

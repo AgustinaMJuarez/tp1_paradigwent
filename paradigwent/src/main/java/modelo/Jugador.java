@@ -11,7 +11,6 @@ public class Jugador {
     private final List<Carta> pilaDescarte;
     private final Map<TipoAtaque, List<Criatura>> lineas;
     private boolean paso;
-    private final Set<TipoAtaque> lineasConCuerno;
 
     public Jugador(Mazo mazo) {
         this.vidas = 3;
@@ -20,7 +19,6 @@ public class Jugador {
         this.pilaDescarte = new ArrayList<Carta>();
         this.lineas = new HashMap<>();
         this.paso = false;
-        this.lineasConCuerno = new HashSet<>()
     }
 
     public boolean tieneCarta(Carta carta) {
@@ -45,8 +43,18 @@ public class Jugador {
                 .add(criatura);
     }
 
-    public void agregarEfecto(Efecto efecto) {
+    public void jugarEfecto(
+            Efecto efecto,
+            Tablero tablero,
+            Jugador jugadorObjetivo,
+            TipoAtaque tipoAtaque) {
 
+        if (!tieneCarta(efecto)) {
+            return;
+        }
+
+        mano.remove(efecto);
+        efecto.jugar(this, tablero, jugadorObjetivo, tipoAtaque);
     }
 
 
@@ -67,7 +75,6 @@ public class Jugador {
             pilaDescarte.addAll(listaCriaturas);
             listaCriaturas.clear();
         }
-
     }
 
     public void pasarTurno() {
@@ -86,12 +93,36 @@ public class Jugador {
         return paso;
     }
 
-    public void sacarDeLaMano(Carta carta) {
-        //.. en duda con el nombre (la idea es que si saque de la mano para decidir la jugada
-    }
 
     public void repartirMano() {
         //..
+    }
+
+    public int fuerzaMaximaDeCriatura() {
+        int maxima = 0;
+
+        for (List<Criatura> criaturas : lineas.values()) {
+            for (Criatura criatura : criaturas) {
+                maxima = Math.max(maxima, criatura.getFuerza());
+            }
+        }
+
+        return maxima;
+    }
+
+    public void destruirCriaturasDeFuerza(int fuerzaMaxima) {
+        for (List<Criatura> criaturas : lineas.values()) {
+            Iterator<Criatura> iterator = criaturas.iterator();
+
+            while (iterator.hasNext()) {
+                Criatura criatura = iterator.next();
+
+                if (criatura.getFuerza() == fuerzaMaxima) {
+                    pilaDescarte.add(criatura);
+                    iterator.remove();
+                }
+            }
+        }
     }
 
     public int calcularFuerza(Tablero tablero) {
@@ -102,14 +133,17 @@ public class Jugador {
             List<Criatura> criaturas = entry.getValue();
 
             for (Criatura criatura : criaturas) {
-                if (criatura instanceof Efecto){
+                int fuerzaCriatura = criatura.getFuerza();
 
+                if (climaTablero != null && climaTablero.afecta(tipoAtaque)) {
+                    fuerzaCriatura = 1;
                 }
-                if ((climaTablero != null) && (climaTablero.afecta(tipoAtaque))) {
-                    fuerza += 1;
-                } else{
-                    fuerza += criatura.getFuerza();
+
+                if (tablero.tieneCuerno(this, tipoAtaque)) {
+                    fuerzaCriatura *= 2;
                 }
+
+                fuerza += fuerzaCriatura;
             }
         }
         return fuerza;

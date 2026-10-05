@@ -13,6 +13,20 @@ public class Efecto extends Carta{
 
     @Override
     public void jugar(Jugador jugador, Tablero tablero) {
-        // aplicar efecto
+        // ...
+    }
+    public void jugar(
+            Jugador jugador,
+            Tablero tablero,
+            Jugador jugadorObjetivo,
+            TipoAtaque tipoAtaque) {
+
+        if (tipoEfecto == TipoEfecto.CUERNO_DE_COMANDANTE) {
+            tablero.agregarCuerno(jugadorObjetivo, tipoAtaque);
+        }
+
+        if (tipoEfecto == TipoEfecto.QUEMADURA) {
+            tablero.aplicarQuemadura();
+        }
     }
 }

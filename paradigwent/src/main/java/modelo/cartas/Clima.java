@@ -11,10 +11,6 @@ public class Clima extends Carta{
         this.tipoClima = tipoClima;
     }
 
-    public Clima(String nombre) {
-        super();
-    }
-
     public TipoClima getTipoClima() {
         return tipoClima;
     }
