@@ -22,5 +22,13 @@ public class Mazo {
     public void sortearMazo() {
         Collections.shuffle(cartas);
     }
+
+    public int cantidadCartas() {
+        return cartas.size();
+    }
+
+    public List<Carta> getCartas() {
+        return Collections.unmodifiableList(cartas);
+    }
 }
 

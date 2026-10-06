@@ -9,12 +9,14 @@ public class Ronda {
     private final Jugador enemigo;
     private final Tablero tablero;
     private Jugador jugadorActual;
+    private boolean finalizada;
 
     public Ronda(Jugador jugador, Jugador enemigo, Jugador jugadorActual, Tablero tablero) {
         this.jugador = jugador;
         this.enemigo = enemigo;
         this.jugadorActual = jugadorActual;
         this.tablero = tablero;
+        this.finalizada = false;
     }
 
     public Jugador getJugadorActual() {
@@ -72,7 +74,11 @@ public class Ronda {
     }
 
     public void finalizar(){
+        if (finalizada) {
+            return;
+        }
         Jugador ganador = determinarGanador();
+
         if (ganador == jugador) {
             enemigo.perderVida();
         } else if (ganador == enemigo) {
@@ -81,12 +87,19 @@ public class Ronda {
             jugador.perderVida();
             enemigo.perderVida();
         }
+
         jugador.resetearPaso();
         enemigo.resetearPaso();
+
         jugador.descartarCartasLineas();
         enemigo.descartarCartasLineas();
+
         tablero.limpiarClimaEfecto();
+
+        finalizada = true;
     }
+
+
 
 }
 

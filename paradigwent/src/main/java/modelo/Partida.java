@@ -10,12 +10,13 @@ public class Partida {
     private Ronda rondaActual;
     private final Tablero tablero;
     private final Automata automata;
+    private int numeroRonda;
 
     public Partida(Jugador jugador, Jugador enemigo) {
         this.jugador = jugador;
         this.enemigo = enemigo;
         this.tablero = new Tablero(jugador, enemigo);
-        this.automata = new Automata(enemigo);
+        this.automata = new Automata(enemigo, jugador);
     }
 
     public void iniciarPartida() {
@@ -23,10 +24,23 @@ public class Partida {
         manejarTurno();
     }
 
+    public Ronda getRondaActual() {
+        return rondaActual;
+    }
+
+    public Tablero getTablero() {
+        return tablero;
+    }
+
     private void crearRonda() {
         Random random = new Random();
         Jugador jugadorInicial = random.nextBoolean() ? jugador : enemigo;
         this.rondaActual = new Ronda(jugador, enemigo, jugadorInicial, tablero);
+        numeroRonda++;
+    }
+
+    public int getNumeroRonda() {
+        return numeroRonda;
     }
 
     public void manejarRondas() {
@@ -80,5 +94,8 @@ public class Partida {
         }
     }
 
+    public Jugador getJugadorActual() {
+        return rondaActual.getJugadorActual();
+    }
 
 }

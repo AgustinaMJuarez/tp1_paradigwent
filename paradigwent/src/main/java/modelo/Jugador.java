@@ -25,6 +25,14 @@ public class Jugador {
         return mano;
     }
 
+    public Mazo getMazo() {
+        return mazo;
+    }
+
+    public int getVidas() {
+        return vidas;
+    }
+
     public boolean tieneCarta(Carta carta) {
         return mano.contains(carta);
     }
