@@ -1,6 +1,7 @@
 package modelo;
 
 import modelo.cartas.Clima;
+import modelo.cartas.Efecto;
 import modelo.cartas.TipoAtaque;
 
 import java.util.*;
@@ -11,11 +12,13 @@ public class Tablero {
     private final Jugador jugador;
     private final Jugador enemigo;
     private final Map<Jugador, Set<TipoAtaque>> lineasConCuerno;
+    private final Map<Jugador, List<Efecto>> efectosJugados;
 
     public Tablero(Jugador jugador, Jugador enemigo) {
         this.jugador = jugador;
         this.enemigo = enemigo;
         this.lineasConCuerno = new HashMap<>();
+        this.efectosJugados = new HashMap<>();
     }
 
     public Clima getClima() {
@@ -34,8 +37,16 @@ public class Tablero {
         if (clima != null) {
             creadorClima.descartarCarta(clima);
         }
+
+        for (Map.Entry<Jugador, List<Efecto>> entry : efectosJugados.entrySet()) {
+            for (Efecto efecto : entry.getValue()) {
+                entry.getKey().descartarCarta(efecto);
+            }
+        }
+
         clima = null;
         creadorClima = null;
+        efectosJugados.clear();
         lineasConCuerno.clear();
     }
 
@@ -66,6 +77,12 @@ public class Tablero {
 
         jugador.destruirCriaturasDeFuerza(fuerzaMaxima);
         enemigo.destruirCriaturasDeFuerza(fuerzaMaxima);
+    }
+
+    public void agregarEfecto(Jugador jugador, Efecto efecto) {
+        efectosJugados
+                .computeIfAbsent(jugador, j -> new ArrayList<>())
+                .add(efecto);
     }
 
 

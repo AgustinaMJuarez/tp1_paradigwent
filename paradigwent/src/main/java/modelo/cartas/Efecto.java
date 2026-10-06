@@ -21,6 +21,8 @@ public class Efecto extends Carta{
             Jugador jugadorObjetivo,
             TipoAtaque tipoAtaque) {
 
+        tablero.agregarEfecto(jugador, this);
+
         if (tipoEfecto == TipoEfecto.CUERNO_DE_COMANDANTE) {
             tablero.agregarCuerno(jugadorObjetivo, tipoAtaque);
         }
