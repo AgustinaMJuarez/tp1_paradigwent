@@ -10,4 +10,5 @@ module org.example {
     exports modelo;
     exports modelo.cartas;
     exports modelo.loader;
+    exports vista to javafx.graphics;
 }
