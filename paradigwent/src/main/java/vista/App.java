@@ -16,12 +16,6 @@ public class App extends Application {
     @Override
     public void start(Stage stage) {
 
-        /*
-         * =============================
-         * IMAGEN DE FONDO
-         * =============================
-         */
-
         Image imagen = new Image(
                 getClass().getResourceAsStream(
                         "/imgs/bienvenida.png"
@@ -36,12 +30,6 @@ public class App extends Application {
         background.setPreserveRatio(false);
 
 
-        /*
-         * =============================
-         * TITULOS
-         * =============================
-         */
-
         Label titulo =
                 new Label("PARADIGWENT");
 
@@ -51,12 +39,6 @@ public class App extends Application {
                 );
 
 
-        /*
-         * =============================
-         * BOTONES
-         * =============================
-         */
-
         Button botonJugar =
                 new Button("Jugar");
 
@@ -65,13 +47,6 @@ public class App extends Application {
 
         Button botonSalir =
                 new Button("Salir");
-
-
-        /*
-         * =============================
-         * CLASES CSS
-         * =============================
-         */
 
         titulo.getStyleClass().add(
                 "titulo"
@@ -93,13 +68,6 @@ public class App extends Application {
                 "boton-menu"
         );
 
-
-        /*
-         * =============================
-         * MENU
-         * =============================
-         */
-
         VBox menu =
                 new VBox(
                         20,
@@ -114,19 +82,6 @@ public class App extends Application {
                 Pos.CENTER
         );
 
-
-        /*
-         * =============================
-         * CONTENEDOR PRINCIPAL
-         * =============================
-         *
-         * StackPane permite poner
-         * elementos uno encima del otro.
-         *
-         * Primero el fondo,
-         * después el menú.
-         */
-
         StackPane root =
                 new StackPane();
 
@@ -135,26 +90,12 @@ public class App extends Application {
                 menu
         );
 
-
-        /*
-         * =============================
-         * ESCENA
-         * =============================
-         */
-
         Scene scene =
                 new Scene(
                         root,
                         1000,
                         700
                 );
-
-
-        /*
-         * =============================
-         * CARGAR CSS
-         * =============================
-         */
 
         scene.getStylesheets().add(
                 getClass()
@@ -165,22 +106,10 @@ public class App extends Application {
         );
 
 
-        /*
-         * =============================
-         * EVENTOS
-         * =============================
-         */
-
         botonSalir.setOnAction(
                 event -> stage.close()
         );
 
-
-        /*
-         * =============================
-         * MOSTRAR VENTANA
-         * =============================
-         */
 
         stage.setTitle(
                 "Paradigwent"
