@@ -21,6 +21,10 @@ public class Jugador {
         this.paso = false;
     }
 
+    public List<Carta> getMano() {
+        return mano;
+    }
+
     public boolean tieneCarta(Carta carta) {
         return mano.contains(carta);
     }
@@ -148,6 +152,5 @@ public class Jugador {
         }
         return fuerza;
     }
-
 
 }

@@ -1,5 +1,7 @@
 package modelo;
 
+import modelo.cartas.Carta;
+
 import java.util.Random;
 
 public class Partida {
@@ -7,11 +9,18 @@ public class Partida {
     private final Jugador enemigo;
     private Ronda rondaActual;
     private final Tablero tablero;
+    private final Automata automata;
 
     public Partida(Jugador jugador, Jugador enemigo) {
         this.jugador = jugador;
         this.enemigo = enemigo;
         this.tablero = new Tablero(jugador, enemigo);
+        this.automata = new Automata(enemigo);
+    }
+
+    public void iniciarPartida() {
+        crearRonda();
+        manejarTurno();
     }
 
     private void crearRonda() {
@@ -50,6 +59,24 @@ public class Partida {
             return enemigo;
         }else{
             return jugador;
+        }
+    }
+
+    public void jugarCarta(Carta carta) {
+        rondaActual.jugarCarta(carta);
+        manejarRondas();
+        manejarTurno();
+    }
+
+    public void pasarTurno() {
+        rondaActual.pasar();
+        manejarRondas();
+        manejarTurno();
+    }
+
+    private void manejarTurno() {
+        if (rondaActual.getJugadorActual() == enemigo) {
+            automata.jugarTurno(this);
         }
     }
 

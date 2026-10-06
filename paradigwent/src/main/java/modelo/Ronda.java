@@ -17,11 +17,22 @@ public class Ronda {
         this.tablero = tablero;
     }
 
+    public Jugador getJugadorActual() {
+        return jugadorActual;
+    }
+
+
     private void cambiarJugador() {
+        Jugador siguiente;
+
         if (jugadorActual == jugador) {
-            jugadorActual = enemigo;
-        }else {
-            jugadorActual = jugador;
+            siguiente = enemigo;
+        } else {
+            siguiente = jugador;
+        }
+
+        if (!siguiente.yaPaso()) {
+            jugadorActual = siguiente;
         }
     }
 
