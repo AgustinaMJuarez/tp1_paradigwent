@@ -110,6 +110,13 @@ public class App extends Application {
                 event -> stage.close()
         );
 
+        botonJugar.setOnAction(
+                event -> {
+                    PantallaJuego pantallaJuego = new PantallaJuego(stage);
+                    pantallaJuego.mostrar();
+                }
+        );
+
 
         stage.setTitle(
                 "Paradigwent"

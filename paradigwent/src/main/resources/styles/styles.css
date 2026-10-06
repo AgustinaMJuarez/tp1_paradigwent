@@ -56,3 +56,200 @@
 .boton-menu:pressed {
     -fx-background-color: rgba(255, 255, 255, 0.35);
 }
+
+
+
+
+.tablero {
+    -fx-background-color: rgba(15, 15, 15, 0.96);
+    -fx-padding: 10px;
+}
+
+
+
+.panel-jugadores {
+    -fx-pref-width: 190px;
+    -fx-padding: 15px 10px;
+}
+
+.informacion-jugador {
+    -fx-padding: 10px 5px;
+}
+
+.nombre-jugador {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.8),
+            6,
+            0.5,
+            0,
+            2
+    );
+}
+
+.vidas {
+    -fx-font-size: 18px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.puntaje {
+    -fx-font-size: 15px;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+
+
+.pila {
+    -fx-pref-width: 90px;
+    -fx-pref-height: 35px;
+
+    -fx-background-color: rgba(20, 20, 20, 0.85);
+    -fx-text-fill: white;
+
+    -fx-font-family: "Georgia";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 6px;
+    -fx-border-radius: 6px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-border-width: 1px;
+
+    -fx-cursor: hand;
+}
+
+
+.campo-juego {
+    -fx-padding: 10px;
+}
+
+.linea {
+    -fx-pref-width: 700px;
+    -fx-pref-height: 50px;
+
+    -fx-padding: 0 12px;
+
+    -fx-background-color: rgba(35, 35, 35, 0.80);
+
+    -fx-border-color: rgba(255, 255, 255, 0.30);
+    -fx-border-width: 1px;
+
+    -fx-background-radius: 5px;
+    -fx-border-radius: 5px;
+}
+
+.nombre-linea {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(255, 255, 255, 0.65);
+}
+
+.zona-clima {
+    -fx-pref-width: 700px;
+    -fx-pref-height: 45px;
+
+    -fx-padding: 4px 0;
+
+    -fx-background-color: rgba(20, 20, 20, 0.95);
+
+    -fx-border-color: rgba(255, 255, 255, 0.40);
+    -fx-border-width: 1px 0 1px 0;
+}
+
+.titulo-clima {
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+    -fx-text-fill: rgba(255, 255, 255, 0.60);
+}
+
+.clima {
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+}
+
+
+
+.zona-inferior {
+    -fx-padding: 8px 0 5px 0;
+}
+
+.mano {
+    -fx-padding: 5px;
+}
+
+.carta {
+    -fx-pref-width: 65px;
+    -fx-pref-height: 82px;
+
+    -fx-background-color: rgba(20, 20, 20, 0.90);
+    -fx-text-fill: white;
+
+    -fx-font-family: "Georgia";
+    -fx-font-size: 11px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.40);
+    -fx-border-width: 1px;
+
+    -fx-cursor: hand;
+}
+
+.carta:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.20);
+    -fx-border-color: white;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(255, 255, 255, 0.30),
+            8,
+            0.4,
+            0,
+            0
+    );
+}
+
+.carta:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+}
+
+
+
+.boton-juego {
+    -fx-pref-width: 120px;
+    -fx-pref-height: 32px;
+
+    -fx-background-color: rgba(20, 20, 20, 0.75);
+    -fx-text-fill: white;
+
+    -fx-font-family: "Georgia";
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.45);
+    -fx-border-width: 1px;
+
+    -fx-cursor: hand;
+}
+
+.boton-juego:hover {
+    -fx-background-color: rgba(255, 255, 255, 0.20);
+    -fx-border-color: white;
+}
+
+.boton-juego:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+}
