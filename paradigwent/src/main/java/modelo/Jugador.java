@@ -95,7 +95,9 @@ public class Jugador {
 
 
     public void repartirMano() {
-        //..
+        for (int i =0; i < 10; i++) {
+            mano.add(mazo.robarCarta());
+        }
     }
 
     public int fuerzaMaximaDeCriatura() {
