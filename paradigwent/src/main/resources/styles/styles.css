@@ -513,3 +513,8 @@
 .boton-reglas:pressed {
     -fx-background-color: rgba(90, 65, 170, 0.95);
 }
+
+.criatura {
+    -fx-padding: 8px;
+    -fx-alignment: center;
+}
