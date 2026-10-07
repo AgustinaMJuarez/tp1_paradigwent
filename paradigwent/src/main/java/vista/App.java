@@ -16,7 +16,13 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+
+
 public class App extends Application {
+
+    private static final String TEXTO_JUGAR = "JUGAR";
+    private static final String TEXTO_REGLAS = "REGLAS";
+    private static final String TEXTO_SALIR = "SALIR";
 
     @Override
     public void start(Stage stage) {
@@ -34,10 +40,9 @@ public class App extends Application {
         Label titulo = new Label("PARADIGWENT");
         Label subtitulo = new Label("Paradigmas de Programación · FIUBA");
 
-        Button botonJugar = new Button("JUGAR");
-        Button botonReglas = new Button("REGLAS");
-
-        Button botonSalir = new Button("SALIR");
+        Button botonJugar = new Button(TEXTO_JUGAR);
+        Button botonReglas = new Button(TEXTO_REGLAS);
+        Button botonSalir = new Button(TEXTO_SALIR);
 
         titulo.getStyleClass().add("titulo");
         subtitulo.getStyleClass().add("subtitulo");

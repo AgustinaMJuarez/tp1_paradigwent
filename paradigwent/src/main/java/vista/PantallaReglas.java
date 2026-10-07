@@ -4,12 +4,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.animation.FadeTransition;
+import javafx.util.Duration;
 
 public class PantallaReglas {
 
+    private static final String TEXTO_REGLAS = "REGLAS";
     private final Stage stage;
 
     public PantallaReglas(Stage stage) {
@@ -18,13 +23,22 @@ public class PantallaReglas {
 
     public void mostrar() {
 
-        BorderPane root = new BorderPane();
+        Image imagen = new Image(
+                getClass().getResourceAsStream("/imgs/fondo.png")
+        );
 
-        root.getStyleClass().add("pantalla-reglas");
+        ImageView background = new ImageView(imagen);
+
+        background.setFitWidth(1000);
+        background.setFitHeight(700);
+        background.setPreserveRatio(false);
 
         VBox contenido = crearContenido();
 
-        root.setCenter(contenido);
+        StackPane root = new StackPane(
+                background,
+                contenido
+        );
 
         Scene scene = new Scene(
                 root,
@@ -39,14 +53,26 @@ public class PantallaReglas {
         );
 
         stage.setScene(scene);
+
+        root.setOpacity(0);
+
+        FadeTransition entrada = new FadeTransition(
+                Duration.millis(500),
+                root
+        );
+
+        entrada.setFromValue(0);
+        entrada.setToValue(1);
+
+        entrada.play();
     }
 
     private VBox crearContenido() {
 
-        Label titulo = new Label("REGLAS");
+        Label titulo = new Label(TEXTO_REGLAS);
         titulo.getStyleClass().add("titulo-reglas");
 
-        Label objetivoTitulo = new Label("OBJETIVO");
+        Label objetivoTitulo = new Label("✦ OBJETIVO ✦");
         objetivoTitulo.getStyleClass().add("subtitulo-reglas");
 
         Label objetivo = new Label(
@@ -54,7 +80,7 @@ public class PantallaReglas {
         );
         objetivo.getStyleClass().add("texto-reglas");
 
-        Label comoJugarTitulo = new Label("CÓMO SE JUEGA");
+        Label comoJugarTitulo = new Label("✦ CÓMO SE JUEGA ✦");
         comoJugarTitulo.getStyleClass().add("subtitulo-reglas");
 
         Label comoJugar = new Label(
@@ -65,7 +91,7 @@ public class PantallaReglas {
         );
         comoJugar.getStyleClass().add("texto-reglas");
 
-        Label cartasTitulo = new Label("CARTAS");
+        Label cartasTitulo = new Label("✦ CARTAS ✦");
         cartasTitulo.getStyleClass().add("subtitulo-reglas");
 
         Label cartas = new Label(
@@ -75,7 +101,7 @@ public class PantallaReglas {
         );
         cartas.getStyleClass().add("texto-reglas");
 
-        Label rondasTitulo = new Label("RONDAS");
+        Label rondasTitulo = new Label("✦ RONDAS ✦");
         rondasTitulo.getStyleClass().add("subtitulo-reglas");
 
         Label rondas = new Label(
