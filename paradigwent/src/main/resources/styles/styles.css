@@ -1,5 +1,5 @@
 .root {
-    -fx-font-family: "Georgia";
+    -fx-font-family: "Montserrat";
 }
 
 .titulo {
@@ -57,35 +57,61 @@
     -fx-background-color: rgba(255, 255, 255, 0.35);
 }
 
-
-
-
 .tablero {
-    -fx-background-color: rgba(15, 15, 15, 0.96);
-    -fx-padding: 10px;
-}
+    -fx-background-image: url("../imgs/fondo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
 
+    -fx-padding: 14px;
+}
 
 
 .panel-jugadores {
-    -fx-pref-width: 190px;
-    -fx-padding: 15px 10px;
+    -fx-pref-width: 185px;
+    -fx-padding: 18px 12px;
+    -fx-background-color:
+            linear-gradient(
+                    to bottom,
+                    rgba(18, 16, 38, 0.88),
+                    rgba(13, 12, 28, 0.78)
+            );
+    -fx-background-radius: 18px;
+    -fx-border-color: rgba(210, 200, 255, 0.22);
+    -fx-border-width: 1px;
+    -fx-border-radius: 18px;
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.55),
+            20,
+            0.25,
+            3,
+            5
+    );
 }
 
 .informacion-jugador {
-    -fx-padding: 10px 5px;
+    -fx-padding: 14px 8px;
+
+    -fx-background-color: rgba(255, 255, 255, 0.035);
+    -fx-background-radius: 14px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.08);
+    -fx-border-radius: 14px;
 }
 
 .nombre-jugador {
-    -fx-font-size: 20px;
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-size: 18px;
     -fx-font-weight: bold;
-    -fx-text-fill: white;
+
+    -fx-text-fill: #f7f3ff;
 
     -fx-effect: dropshadow(
             gaussian,
-            rgba(0, 0, 0, 0.8),
-            6,
-            0.5,
+            rgba(116, 91, 210, 0.75),
+            9,
+            0.35,
             0,
             2
     );
