@@ -1,12 +1,17 @@
 package vista;
 
-import javafx.animation.*;
+import javafx.animation.Animation;
+import javafx.animation.FadeTransition;
+import javafx.animation.ScaleTransition;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.image.*;
-import javafx.scene.layout.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -14,7 +19,13 @@ import javafx.util.Duration;
 import modelo.*;
 import modelo.loader.*;
 
+
+
 public class App extends Application {
+
+    private static final String TEXTO_JUGAR = "JUGAR";
+    private static final String TEXTO_REGLAS = "REGLAS";
+    private static final String TEXTO_SALIR = "SALIR";
 
     @Override
     public void start(Stage stage) {
@@ -32,10 +43,9 @@ public class App extends Application {
         Label titulo = new Label("PARADIGWENT");
         Label subtitulo = new Label("Paradigmas de Programación · FIUBA");
 
-        Button botonJugar = new Button("JUGAR");
-        Button botonReglas = new Button("REGLAS");
-
-        Button botonSalir = new Button("SALIR");
+        Button botonJugar = new Button(TEXTO_JUGAR);
+        Button botonReglas = new Button(TEXTO_REGLAS);
+        Button botonSalir = new Button(TEXTO_SALIR);
 
         titulo.getStyleClass().add("titulo");
         subtitulo.getStyleClass().add("subtitulo");
@@ -89,8 +99,19 @@ public class App extends Application {
         botonSalir.setOnAction(event -> stage.close());
 
         botonJugar.setOnAction(
-                event -> iniciarJuego(stage)
+                event -> {
+                    PantallaJuego pantallaJuego = new PantallaJuego(stage);
+                    pantallaJuego.mostrar();
+                }
         );
+
+        botonReglas.setOnAction(
+                event -> {
+                    PantallaReglas pantallaReglas = new PantallaReglas(stage);
+                    pantallaReglas.mostrar();
+                }
+        );
+
         stage.setTitle("Paradigwent");
         stage.setScene(scene);
         stage.show();

@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Montserrat SemiBold';
+    src: url('../fonts/Montserrat-SemiBold.ttf');
+}
+
 .root {
     -fx-font-family: "Montserrat";
 }
@@ -385,6 +390,7 @@
                     rgba(56, 45, 102, 0.98)
             );
 
+<<<<<<< HEAD
     -fx-border-color: white;
 
     -fx-effect: dropshadow(
@@ -392,7 +398,123 @@
             rgba(180, 165, 255, 0.55),
             13,
             0.35,
+=======
+.boton-juego:pressed {
+    -fx-background-color: rgba(255, 255, 255, 0.35);
+}
+
+
+/*reglas*/
+
+
+.contenido-reglas {
+    -fx-pref-width: 850px;
+    -fx-padding: 25px 55px;
+    -fx-background-color: rgba(18, 15, 40, 0.47);
+}
+
+.titulo-reglas {
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-size: 48px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fffefe;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(150, 100, 255, 1),
+            14,
+            0.55,
+            0,
+            2
+    );
+
+    -fx-padding: 0 0 15px 0;
+}
+
+.subtitulo-reglas {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 21px;
+    -fx-text-fill: #d5d2d2;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.85),
+            4,
+            0.5,
+            0,
+            1
+    );
+}
+
+.texto-reglas {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #d5d2d2;
+
+    -fx-line-spacing: 7px;
+
+    -fx-text-alignment: center;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.9),
+            4,
+            0.5,
+            0,
+            1
+    );
+}
+
+.boton-reglas {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 50px;
+
+    -fx-background-color: rgba(105, 80, 190, 0.75);
+    -fx-text-fill: white;
+
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+
+    -fx-border-color: rgba(220, 200, 255, 0.8);
+    -fx-border-width: 1px;
+
+    -fx-cursor: hand;
+
+    -fx-padding: 10px 20px;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(120, 80, 255, 0.55),
+            10,
+            0.4,
+>>>>>>> 959fc2ce381b17aa0d7afeb7ff59d9b5aaf12c7a
             0,
             2
     );
 }
+<<<<<<< HEAD
+=======
+
+.boton-reglas:hover {
+    -fx-background-color: rgba(130, 100, 220, 0.9);
+    -fx-border-color: white;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(160, 120, 255, 0.9),
+            18,
+            0.5,
+            0,
+            2
+    );
+}
+
+.boton-reglas:pressed {
+    -fx-background-color: rgba(90, 65, 170, 0.95);
+}
+>>>>>>> 959fc2ce381b17aa0d7afeb7ff59d9b5aaf12c7a
