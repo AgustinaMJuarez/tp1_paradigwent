@@ -390,22 +390,21 @@
                     rgba(56, 45, 102, 0.98)
             );
 
-<<<<<<< HEAD
     -fx-border-color: white;
 
     -fx-effect: dropshadow(
             gaussian,
-            rgba(180, 165, 255, 0.55),
-            13,
-            0.35,
-=======
+            rgba(0, 0, 0, 0.50),
+            6,
+            0.2,
+            0,
+            2
+    );
+}
+
 .boton-juego:pressed {
     -fx-background-color: rgba(255, 255, 255, 0.35);
 }
-
-
-/*reglas*/
-
 
 .contenido-reglas {
     -fx-pref-width: 850px;
@@ -492,13 +491,10 @@
             rgba(120, 80, 255, 0.55),
             10,
             0.4,
->>>>>>> 959fc2ce381b17aa0d7afeb7ff59d9b5aaf12c7a
             0,
             2
     );
 }
-<<<<<<< HEAD
-=======
 
 .boton-reglas:hover {
     -fx-background-color: rgba(130, 100, 220, 0.9);
@@ -517,4 +513,3 @@
 .boton-reglas:pressed {
     -fx-background-color: rgba(90, 65, 170, 0.95);
 }
->>>>>>> 959fc2ce381b17aa0d7afeb7ff59d9b5aaf12c7a

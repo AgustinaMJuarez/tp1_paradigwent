@@ -20,7 +20,6 @@ import modelo.*;
 import modelo.loader.*;
 
 
-
 public class App extends Application {
 
     private static final String TEXTO_JUGAR = "JUGAR";
@@ -99,10 +98,7 @@ public class App extends Application {
         botonSalir.setOnAction(event -> stage.close());
 
         botonJugar.setOnAction(
-                event -> {
-                    PantallaJuego pantallaJuego = new PantallaJuego(stage);
-                    pantallaJuego.mostrar();
-                }
+                event -> iniciarJuego(stage)
         );
 
         botonReglas.setOnAction(
