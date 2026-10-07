@@ -97,6 +97,13 @@ public class App extends Application {
                 }
         );
 
+        botonReglas.setOnAction(
+                event -> {
+                    PantallaReglas pantallaReglas = new PantallaReglas(stage);
+                    pantallaReglas.mostrar();
+                }
+        );
+
         stage.setTitle("Paradigwent");
         stage.setScene(scene);
         stage.show();

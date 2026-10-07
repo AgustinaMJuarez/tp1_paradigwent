@@ -104,7 +104,6 @@
 }
 
 
-
 .pila {
     -fx-pref-width: 90px;
     -fx-pref-height: 35px;
@@ -252,4 +251,117 @@
 
 .boton-juego:pressed {
     -fx-background-color: rgba(255, 255, 255, 0.35);
+}
+
+
+
+
+.pantalla-reglas {
+    -fx-background-color: rgba(18, 15, 45, 0.98);
+}
+
+.contenido-reglas {
+    -fx-pref-width: 850px;
+    -fx-padding: 35px 50px;
+}
+
+
+.titulo-reglas {
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-size: 46px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(130, 90, 255, 0.85),
+            12,
+            0.5,
+            0,
+            2
+    );
+
+    -fx-padding: 0 0 15px 0;
+}
+
+
+
+.subtitulo-reglas {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 17px;
+    -fx-font-weight: bold;
+    -fx-text-fill: white;
+
+    -fx-padding: 5px 0 0 0;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.7),
+            5,
+            0.5,
+            0,
+            1
+    );
+}
+
+/* TEXTO */
+
+.texto-reglas {
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 15px;
+    -fx-text-fill: rgba(255, 255, 255, 0.78);
+
+    -fx-line-spacing: 7px;
+
+    -fx-text-alignment: center;
+}
+
+
+.boton-reglas {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 50px;
+
+    -fx-background-color: rgba(20, 20, 20, 0.75);
+    -fx-text-fill: white;
+
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+
+    -fx-background-radius: 8px;
+    -fx-border-radius: 8px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.45);
+    -fx-border-width: 1px;
+
+    -fx-cursor: hand;
+
+    -fx-padding: 10px 20px;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(0, 0, 0, 0.4),
+            8,
+            0.3,
+            0,
+            2
+    );
+}
+
+.boton-reglas:hover {
+    -fx-background-color: rgba(105, 80, 190, 0.55);
+    -fx-border-color: white;
+
+    -fx-effect: dropshadow(
+            gaussian,
+            rgba(140, 100, 255, 0.7),
+            12,
+            0.4,
+            0,
+            0
+    );
+}
+
+.boton-reglas:pressed {
+    -fx-background-color: rgba(130, 100, 210, 0.65);
 }
