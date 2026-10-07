@@ -1,20 +1,18 @@
 package vista;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import modelo.*;
+import modelo.loader.*;
 
 public class App extends Application {
 
@@ -91,15 +89,59 @@ public class App extends Application {
         botonSalir.setOnAction(event -> stage.close());
 
         botonJugar.setOnAction(
-                event -> {
-                    PantallaJuego pantallaJuego = new PantallaJuego(stage);
-                    pantallaJuego.mostrar();
-                }
+                event -> iniciarJuego(stage)
         );
-
         stage.setTitle("Paradigwent");
         stage.setScene(scene);
         stage.show();
+    }
+
+    private void iniciarJuego(Stage stage) {
+
+        CargadorCartas cargadorCartas = new CargadorCartasDefault();
+        CargadorMazo cargadorMazo = new CargadorMazo(cargadorCartas);
+
+        SorteadorFacciones sorteador = new SorteadorFacciones();
+
+        Faccion[] facciones = sorteador.sortear();
+        Faccion faccionJugador = facciones[0];
+        Faccion faccionAutomata = facciones[1];
+
+        Mazo mazoJugador =
+                cargadorMazo.cargar(
+                        faccionJugador.getArchivo()
+                );
+
+        Mazo mazoAutomata =
+                cargadorMazo.cargar(
+                        faccionAutomata.getArchivo()
+                );
+
+        mazoJugador.sortearMazo();
+        mazoAutomata.sortearMazo();
+
+        Jugador jugador =  new Jugador(mazoJugador);
+        Jugador jugadorAutomata = new Jugador(mazoAutomata);
+
+        jugador.repartirMano();
+        jugadorAutomata.repartirMano();
+
+        Partida partida =
+                new Partida(
+                        jugador,
+                        jugadorAutomata
+                );
+
+        partida.iniciarPartida();
+
+        PantallaJuego pantallaJuego =
+                new PantallaJuego(
+                        stage,
+                        partida,
+                        jugador
+                );
+
+        pantallaJuego.mostrar();
     }
 
     private void agregarAnimacionHover(Button boton) {

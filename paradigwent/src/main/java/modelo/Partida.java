@@ -98,4 +98,7 @@ public class Partida {
         return rondaActual.getJugadorActual();
     }
 
+    public Jugador getEnemigo() {
+        return enemigo;
+    }
 }

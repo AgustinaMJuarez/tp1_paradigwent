@@ -8,13 +8,38 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import modelo.Partida;
+import modelo.Jugador;
+import modelo.cartas.Carta;
 
 public class PantallaJuego {
 
     private final Stage stage;
+    private final Partida partida;
+    private final Jugador jugadorVista;
 
-    public PantallaJuego(Stage stage) {
+    private Label vidasJugadorLabel;
+    private Label vidasEnemigoLabel;
+    private Label rondaLabel;
+    private Label fuerzaJugadorLabel;
+    private Label fuerzaEnemigoLabel;
+
+    private Label climaLabel;
+
+    private HBox mano;
+
+    private HBox asedioEnemigo;
+    private HBox distanciaEnemigo;
+    private HBox cuerpoEnemigo;
+
+    private HBox asedioJugador;
+    private HBox distanciaJugador;
+    private HBox cuerpoJugador;
+
+    public PantallaJuego(Stage stage, Partida partida, Jugador jugador) {
         this.stage = stage;
+        this.partida = partida;
+        this.jugadorVista = jugador;
     }
 
     public void mostrar() {
@@ -33,22 +58,19 @@ public class PantallaJuego {
         );
 
         stage.setScene(scene);
+        actualizarVista();
     }
 
     private BorderPane crearTablero() {
         BorderPane tablero = new BorderPane();
 
         tablero.getStyleClass().add("tablero");
-
         tablero.setLeft(crearPanelJugadores());
-
         tablero.setCenter(crearCampoDeJuego());
-
         tablero.setBottom(crearZonaInferior());
 
         return tablero;
     }
-
 
     private VBox crearPanelJugadores() {
 
@@ -69,19 +91,19 @@ public class PantallaJuego {
         Label nombre = new Label("ENEMIGO");
         nombre.getStyleClass().add("nombre-jugador");
 
-        Label vidas = new Label("♥ ♥ ♥");
-        vidas.getStyleClass().add("vidas");
+        vidasEnemigoLabel = new Label("♥ ♥ ♥");
+        vidasEnemigoLabel.getStyleClass().add("vidas");
 
-        Label puntaje = new Label("Puntaje: 0");
-        puntaje.getStyleClass().add("puntaje");
+        fuerzaEnemigoLabel = new Label("Fuerza: 0");
+        fuerzaEnemigoLabel.getStyleClass().add("puntaje");
 
         VBox mazoYDescarte = crearMazoYDescarte();
 
         VBox enemigo = new VBox(
                 8,
                 nombre,
-                vidas,
-                puntaje,
+                vidasEnemigoLabel,
+                fuerzaEnemigoLabel,
                 mazoYDescarte
         );
 
@@ -96,19 +118,19 @@ public class PantallaJuego {
         Label nombre = new Label("JUGADOR");
         nombre.getStyleClass().add("nombre-jugador");
 
-        Label vidas = new Label("♥ ♥ ♥");
-        vidas.getStyleClass().add("vidas");
+        vidasJugadorLabel = new Label("♥ ♥ ♥");
+        vidasJugadorLabel.getStyleClass().add("vidas");
 
-        Label puntaje = new Label("Puntaje: 0");
-        puntaje.getStyleClass().add("puntaje");
+        fuerzaJugadorLabel = new Label("Fuerza: 0");
+        fuerzaJugadorLabel.getStyleClass().add("puntaje");
 
         VBox mazoYDescarte = crearMazoYDescarte();
 
         VBox jugador = new VBox(
                 8,
                 nombre,
-                vidas,
-                puntaje,
+                vidasJugadorLabel,
+                fuerzaJugadorLabel,
                 mazoYDescarte
         );
 
@@ -133,26 +155,29 @@ public class PantallaJuego {
         );
 
         contenedor.setAlignment(Pos.CENTER);
-
         return contenedor;
     }
 
-
-
     private VBox crearCampoDeJuego() {
+        rondaLabel = new Label(
+                "RONDA " + partida.getNumeroRonda()
+        );
 
-        HBox asedioEnemigo = crearLinea("ASEDIO");
-        HBox distanciaEnemigo = crearLinea("DISTANCIA");
-        HBox cuerpoEnemigo = crearLinea("CUERPO A CUERPO");
+        rondaLabel.getStyleClass().add("ronda");
+
+        asedioEnemigo = crearLinea("ASEDIO");
+        distanciaEnemigo = crearLinea("DISTANCIA");
+        cuerpoEnemigo = crearLinea("CUERPO A CUERPO");
 
         VBox clima = crearZonaClima();
 
-        HBox cuerpoJugador = crearLinea("CUERPO A CUERPO");
-        HBox distanciaJugador = crearLinea("DISTANCIA");
-        HBox asedioJugador = crearLinea("ASEDIO");
+        cuerpoJugador = crearLinea("CUERPO A CUERPO");
+        distanciaJugador = crearLinea("DISTANCIA");
+        asedioJugador = crearLinea("ASEDIO");
 
         VBox campo = new VBox(
                 5,
+                rondaLabel,
                 asedioEnemigo,
                 distanciaEnemigo,
                 cuerpoEnemigo,
@@ -203,11 +228,9 @@ public class PantallaJuego {
         return zona;
     }
 
-
-
     private VBox crearZonaInferior() {
 
-        HBox mano = crearMano();
+        crearMano();
         HBox controles = crearControles();
 
         VBox zona = new VBox(
@@ -222,35 +245,25 @@ public class PantallaJuego {
         return zona;
     }
 
-    private HBox crearMano() {
+    private void crearMano() {
 
-        HBox mano = new HBox(
-                8,
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA"),
-                crearCarta("CARTA")
-        );
-
+        mano = new HBox(8);
         mano.setAlignment(Pos.CENTER);
         mano.getStyleClass().add("mano");
 
-        return mano;
+        actualizarMano();
     }
 
-    private Button crearCarta(String nombre) {
+    private Button crearCarta(Carta carta) {
 
-        Button carta = new Button(nombre);
+        Button nombreCarta = new Button(carta.getNombre());
+        nombreCarta.getStyleClass().add("carta");
 
-        carta.getStyleClass().add("carta");
-
-        return carta;
+        nombreCarta.setOnAction(event -> {
+            partida.jugarCarta(carta);
+            actualizarVista();
+        });
+        return nombreCarta;
     }
 
     private HBox crearControles() {
@@ -260,6 +273,18 @@ public class PantallaJuego {
 
         pasar.getStyleClass().add("boton-juego");
         rendirse.getStyleClass().add("boton-juego");
+
+        pasar.setOnAction(event -> {
+            partida.pasarTurno();
+            actualizarVista();
+        });
+
+
+        rendirse.setOnAction(event -> {
+            jugadorVista.rendirse();
+            actualizarVista();
+        });
+
 
         HBox controles = new HBox(
                 15,
@@ -271,4 +296,40 @@ public class PantallaJuego {
 
         return controles;
     }
+
+    private void actualizarMano() {
+        mano.getChildren().clear();
+        for (Carta carta : jugadorVista.getMano()) {
+
+            Button botonCarta =
+                    crearCarta(carta);
+
+            mano.getChildren().add(
+                    botonCarta
+            );
+        }
+    }
+
+    private String corazones(int vidas) {
+        return "♥ ".repeat(vidas);
+    }
+
+    private void actualizarVista() {
+        actualizarMano();
+        vidasJugadorLabel.setText(
+                corazones(jugadorVista.getVidas())
+        );
+        vidasEnemigoLabel.setText(
+                corazones(partida.getEnemigo().getVidas())
+        );
+        rondaLabel.setText("RONDA " + partida.getNumeroRonda());
+        fuerzaJugadorLabel.setText(
+                "Fuerza: " + jugadorVista.calcularFuerza(partida.getTablero())
+        );
+
+        fuerzaEnemigoLabel.setText(
+                "Fuerza: " + partida.getEnemigo().calcularFuerza(partida.getTablero())
+        );
+    }
+
 }
