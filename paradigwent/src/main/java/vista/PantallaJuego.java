@@ -450,20 +450,34 @@ public class PantallaJuego {
     }
 
     private void mostrarFinDePartida() {
-        boolean gano = partida.ganador() == jugadorVista;
+        Jugador ganador = partida.ganador();
 
-        Label resultado = new Label(gano ? "¡GANASTE!" : "¡GANÓ EL ENEMIGO!");
+        boolean gano = ganador == jugadorVista;
+        boolean empate = ganador == null;
+
+        String titulo;
+        String mensaje;
+
+        if (gano) {
+            titulo = "¡GANASTE!";
+            mensaje = "Fuiste el último jugador con vidas restantes.";
+        } else if (empate) {
+            titulo = "¡EMPATE!";
+            mensaje = "Ambos jugadores se quedaron sin vidas.";
+        } else {
+            titulo = "¡GANÓ EL ENEMIGO!";
+            mensaje = "El enemigo se quedó con la partida. ¡Probá de nuevo!";
+        }
+
+        Label resultado = new Label(titulo);
         resultado.getStyleClass().addAll(
                 "resultado",
-                gano ? "resultado-victoria" : "resultado-derrota"
+                gano ? "resultado-victoria" :
+                        empate ? "resultado-empate" : "resultado-derrota"
         );
 
-        Label mensaje = new Label(
-                gano
-                        ? "Fuiste el último jugador con vidas restantes."
-                        : "El enemigo se quedó con la partida. ¡Probá de nuevo!"
-        );
-        mensaje.getStyleClass().add("mensaje-final");
+        Label mensajeLabel = new Label(mensaje);
+        mensajeLabel.getStyleClass().add("mensaje-final");
 
         Button volver = new Button("VOLVER AL MENÚ");
         volver.getStyleClass().addAll("boton-menu", "boton-primario");
@@ -473,7 +487,7 @@ public class PantallaJuego {
         salir.getStyleClass().add("boton-menu");
         salir.setOnAction(event -> stage.close());
 
-        VBox panel = new VBox(20, resultado, mensaje, volver, salir);
+        VBox panel = new VBox(20, resultado, mensajeLabel, volver, salir);
         panel.setAlignment(Pos.CENTER);
         panel.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
         panel.getStyleClass().add("panel-final");

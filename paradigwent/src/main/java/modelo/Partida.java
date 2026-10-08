@@ -68,11 +68,19 @@ public class Partida {
     }
 
     public Jugador ganador() {
+        if (jugador.estaDerrotado() && enemigo.estaDerrotado()) {
+            return null;
+        }
+
         if (jugador.estaDerrotado()) {
             return enemigo;
-        }else{
+        }
+
+        if (enemigo.estaDerrotado()) {
             return jugador;
         }
+
+        return null;
     }
 
     public void jugarCarta(Carta carta) {
