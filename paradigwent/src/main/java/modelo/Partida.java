@@ -1,7 +1,6 @@
 package modelo;
 
 import modelo.cartas.Carta;
-
 import java.util.Random;
 
 public class Partida {
@@ -79,19 +78,21 @@ public class Partida {
     public void jugarCarta(Carta carta) {
         rondaActual.jugarCarta(carta);
         manejarRondas();
-        manejarTurno();
     }
 
     public void pasarTurno() {
         rondaActual.pasar();
         manejarRondas();
-        manejarTurno();
     }
 
     private void manejarTurno() {
         if (rondaActual.getJugadorActual() == enemigo) {
             automata.jugarTurno(this);
         }
+    }
+
+    public void ejecutarTurnoEnemigo() {
+        manejarTurno();
     }
 
     public Jugador getJugadorActual() {

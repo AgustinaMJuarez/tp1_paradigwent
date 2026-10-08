@@ -21,6 +21,13 @@ public class Jugador {
         this.paso = false;
     }
 
+
+    public List<Criatura> getCriaturasEnLinea(TipoAtaque tipoAtaque) {
+        return Collections.unmodifiableList(
+                lineas.getOrDefault(tipoAtaque, Collections.emptyList())
+        );
+    }
+
     public List<Carta> getMano() {
         return mano;
     }

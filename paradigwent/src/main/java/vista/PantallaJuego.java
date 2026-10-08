@@ -1,5 +1,6 @@
 package vista;
 
+import javafx.animation.PauseTransition;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -8,9 +9,12 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import modelo.Partida;
 import modelo.Jugador;
 import modelo.cartas.Carta;
+import modelo.cartas.Criatura;
+import modelo.cartas.TipoAtaque;
 
 public class PantallaJuego {
 
@@ -23,10 +27,11 @@ public class PantallaJuego {
     private Label rondaLabel;
     private Label fuerzaJugadorLabel;
     private Label fuerzaEnemigoLabel;
-
+    private Label turnoLabel;
     private Label climaLabel;
 
     private HBox mano;
+    private Button pasar;
 
     private HBox asedioEnemigo;
     private HBox distanciaEnemigo;
@@ -59,6 +64,7 @@ public class PantallaJuego {
 
         stage.setScene(scene);
         actualizarVista();
+        manejarTurnoEnemigo();
     }
 
     private BorderPane crearTablero() {
@@ -159,6 +165,8 @@ public class PantallaJuego {
     }
 
     private VBox crearCampoDeJuego() {
+        turnoLabel = new Label();
+        turnoLabel.getStyleClass().add("turno");
         rondaLabel = new Label(
                 "RONDA " + partida.getNumeroRonda()
         );
@@ -178,6 +186,7 @@ public class PantallaJuego {
         VBox campo = new VBox(
                 5,
                 rondaLabel,
+                turnoLabel,
                 asedioEnemigo,
                 distanciaEnemigo,
                 cuerpoEnemigo,
@@ -209,17 +218,16 @@ public class PantallaJuego {
     }
 
     private VBox crearZonaClima() {
-
         Label titulo = new Label("CLIMA");
         titulo.getStyleClass().add("titulo-clima");
 
-        Label clima = new Label("Sin clima");
-        clima.getStyleClass().add("clima");
+        climaLabel = new Label("Sin clima");
+        climaLabel.getStyleClass().add("clima");
 
         VBox zona = new VBox(
                 2,
                 titulo,
-                clima
+                climaLabel
         );
 
         zona.setAlignment(Pos.CENTER);
@@ -256,19 +264,26 @@ public class PantallaJuego {
 
     private Button crearCarta(Carta carta) {
 
-        Button nombreCarta = new Button(carta.getNombre());
+        String texto = carta.getNombre();
+
+        if (carta instanceof Criatura criatura) {
+            texto += "\n" + criatura.getFuerza();
+        }
+
+        Button nombreCarta = new Button(texto);
         nombreCarta.getStyleClass().add("carta");
 
         nombreCarta.setOnAction(event -> {
             partida.jugarCarta(carta);
-            actualizarVista();
+            actualizarJuego();
         });
+
         return nombreCarta;
     }
 
     private HBox crearControles() {
 
-        Button pasar = new Button("PASAR");
+        pasar = new Button("PASAR");
         Button rendirse = new Button("RENDIRSE");
 
         pasar.getStyleClass().add("boton-juego");
@@ -276,13 +291,13 @@ public class PantallaJuego {
 
         pasar.setOnAction(event -> {
             partida.pasarTurno();
-            actualizarVista();
+            actualizarJuego();
         });
 
 
         rendirse.setOnAction(event -> {
             jugadorVista.rendirse();
-            actualizarVista();
+            actualizarJuego();
         });
 
 
@@ -299,14 +314,17 @@ public class PantallaJuego {
 
     private void actualizarMano() {
         mano.getChildren().clear();
+
+        boolean turnoJugador =
+                partida.getJugadorActual() == jugadorVista;
+
         for (Carta carta : jugadorVista.getMano()) {
 
-            Button botonCarta =
-                    crearCarta(carta);
+            Button botonCarta = crearCarta(carta);
 
-            mano.getChildren().add(
-                    botonCarta
-            );
+            botonCarta.setDisable(!turnoJugador);
+
+            mano.getChildren().add(botonCarta);
         }
     }
 
@@ -316,12 +334,14 @@ public class PantallaJuego {
 
     private void actualizarVista() {
         actualizarMano();
+        actualizarLineas();
         vidasJugadorLabel.setText(
                 corazones(jugadorVista.getVidas())
         );
         vidasEnemigoLabel.setText(
                 corazones(partida.getEnemigo().getVidas())
         );
+//        climaLabel.setText();
         rondaLabel.setText("RONDA " + partida.getNumeroRonda());
         fuerzaJugadorLabel.setText(
                 "Fuerza: " + jugadorVista.calcularFuerza(partida.getTablero())
@@ -330,6 +350,147 @@ public class PantallaJuego {
         fuerzaEnemigoLabel.setText(
                 "Fuerza: " + partida.getEnemigo().calcularFuerza(partida.getTablero())
         );
+        if (partida.getJugadorActual() == jugadorVista) {
+            turnoLabel.setText("TU TURNO");
+        } else {
+            turnoLabel.setText("TURNO DEL ENEMIGO");
+        }
+        boolean turnoJugador =
+                partida.getJugadorActual() == jugadorVista;
+
+        pasar.setDisable(!turnoJugador);
+    }
+
+    private void manejarTurnoEnemigo() {
+        if (partida.estaTerminada()) {
+            mostrarFinDePartida();
+            return;
+        }
+
+        if (partida.getJugadorActual() != jugadorVista) {
+            PauseTransition pausa =
+                    new PauseTransition(Duration.seconds(1));
+
+            pausa.setOnFinished(event -> {
+                partida.ejecutarTurnoEnemigo();
+                actualizarVista();
+                manejarTurnoEnemigo();
+            });
+
+            pausa.play();
+        }
+    }
+
+    private void actualizarLinea(
+            HBox linea,
+            Jugador jugador,
+            TipoAtaque tipoAtaque) {
+
+        Label etiqueta = (Label) linea.getChildren().get(0);
+
+        linea.getChildren().clear();
+        linea.getChildren().add(etiqueta);
+
+        for (Criatura criatura : jugador.getCriaturasEnLinea(tipoAtaque)) {
+
+            String texto = criatura.getNombre()
+                    + "\n"
+                    + criatura.getFuerza();
+
+            Label carta = new Label(texto);
+            carta.getStyleClass().add("criatura");
+
+            linea.getChildren().add(carta);
+        }
+    }
+
+    private void actualizarLineas() {
+        actualizarLinea(
+                cuerpoJugador,
+                jugadorVista,
+                TipoAtaque.CUERPO_A_CUERPO
+        );
+
+        actualizarLinea(
+                distanciaJugador,
+                jugadorVista,
+                TipoAtaque.DISTANCIA
+        );
+
+        actualizarLinea(
+                asedioJugador,
+                jugadorVista,
+                TipoAtaque.ASEDIO
+        );
+
+        actualizarLinea(
+                cuerpoEnemigo,
+                partida.getEnemigo(),
+                TipoAtaque.CUERPO_A_CUERPO
+        );
+
+        actualizarLinea(
+                distanciaEnemigo,
+                partida.getEnemigo(),
+                TipoAtaque.DISTANCIA
+        );
+
+        actualizarLinea(
+                asedioEnemigo,
+                partida.getEnemigo(),
+                TipoAtaque.ASEDIO
+        );
+    }
+
+    private void actualizarJuego() {
+        actualizarVista();
+
+        if (partida.estaTerminada()) {
+            mostrarFinDePartida();
+            return;
+        }
+
+        manejarTurnoEnemigo();
+    }
+
+    private void mostrarFinDePartida() {
+
+        Jugador ganador = partida.ganador();
+
+        Label resultado;
+
+        if (ganador == jugadorVista) {
+            resultado = new Label("¡GANASTE!");
+        } else {
+            resultado = new Label("¡GANÓ EL ENEMIGO!");
+        }
+
+        Button volver = new Button("VOLVER AL MENÚ");
+        Button salir = new Button("SALIR");
+
+        volver.setOnAction(event -> {
+        });
+
+        salir.setOnAction(event -> {
+            stage.close();
+        });
+
+        VBox pantalla = new VBox(
+                20,
+                resultado,
+                volver,
+                salir
+        );
+
+        pantalla.setAlignment(Pos.CENTER);
+
+        Scene escenaFinal = new Scene(
+                pantalla,
+                1000,
+                700
+        );
+
+        stage.setScene(escenaFinal);
     }
 
 }
