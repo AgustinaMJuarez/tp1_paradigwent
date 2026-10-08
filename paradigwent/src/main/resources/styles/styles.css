@@ -67,7 +67,6 @@
     -fx-padding: 14px;
 }
 
-
 .panel-jugadores {
     -fx-pref-width: 185px;
     -fx-padding: 18px 12px;
@@ -138,7 +137,6 @@
     -fx-font-weight: bold;
 }
 
-
 .pila {
     -fx-pref-width: 105px;
     -fx-pref-height: 38px;
@@ -184,7 +182,6 @@
     -fx-border-color: rgba(240, 235, 255, 0.85);
 }
 
-
 .campo-juego {
     -fx-padding: 8px 12px;
 }
@@ -217,7 +214,6 @@
             2
     );
 }
-
 
 .linea:hover {
     -fx-background-color:
@@ -265,13 +261,11 @@
     );
 }
 
-
 .titulo-clima {
     -fx-font-size: 9px;
     -fx-font-weight: bold;
     -fx-text-fill: rgba(220, 214, 245, 0.70);
 }
-
 
 .clima {
     -fx-font-family: "Cinzel Decorative";
@@ -279,7 +273,6 @@
     -fx-font-weight: bold;
     -fx-text-fill: #f3efff;
 }
-
 
 .zona-inferior {
     -fx-padding: 8px 10px 8px 200px;
