@@ -1,6 +1,7 @@
 module org.example {
     requires javafx.controls;
     requires com.google.gson;
+    requires javafx.media;
 
     exports org.example;
 
