@@ -1,20 +1,15 @@
 package vista;
 
-import javafx.animation.PauseTransition;
+import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import modelo.Partida;
-import modelo.Jugador;
-import modelo.cartas.Carta;
-import modelo.cartas.Criatura;
-import modelo.cartas.TipoAtaque;
+
+import modelo.*;
+import modelo.cartas.*;
 
 public class PantallaJuego {
 
@@ -56,10 +51,11 @@ public class PantallaJuego {
                 700
         );
 
-        scene.getStylesheets().add(
-                getClass()
-                        .getResource("/styles/styles.css")
-                        .toExternalForm()
+        scene.getStylesheets().addAll(
+                getClass().getResource("/styles/styles.css").toExternalForm(),
+                getClass().getResource("/styles/juego.css").toExternalForm(),
+                getClass().getResource("/styles/fin.css").toExternalForm()
+
         );
 
         stage.setScene(scene);
@@ -454,40 +450,41 @@ public class PantallaJuego {
     }
 
     private void mostrarFinDePartida() {
+        boolean gano = partida.ganador() == jugadorVista;
 
-        Jugador ganador = partida.ganador();
-
-        Label resultado;
-
-        if (ganador == jugadorVista) {
-            resultado = new Label("¡GANASTE!");
-        } else {
-            resultado = new Label("¡GANÓ EL ENEMIGO!");
-        }
-
-        Button volver = new Button("VOLVER AL MENÚ");
-        Button salir = new Button("SALIR");
-
-        volver.setOnAction(event -> {
-        });
-
-        salir.setOnAction(event -> {
-            stage.close();
-        });
-
-        VBox pantalla = new VBox(
-                20,
-                resultado,
-                volver,
-                salir
+        Label resultado = new Label(gano ? "¡GANASTE!" : "¡GANÓ EL ENEMIGO!");
+        resultado.getStyleClass().addAll(
+                "resultado",
+                gano ? "resultado-victoria" : "resultado-derrota"
         );
 
-        pantalla.setAlignment(Pos.CENTER);
+        Label mensaje = new Label(
+                gano
+                        ? "Fuiste el último jugador con vidas restantes."
+                        : "El enemigo se quedó con la partida. ¡Probá de nuevo!"
+        );
+        mensaje.getStyleClass().add("mensaje-final");
 
-        Scene escenaFinal = new Scene(
-                pantalla,
-                1000,
-                700
+        Button volver = new Button("VOLVER AL MENÚ");
+        volver.getStyleClass().addAll("boton-menu", "boton-primario");
+        volver.setOnAction(event -> new App().start(stage));
+
+        Button salir = new Button("SALIR");
+        salir.getStyleClass().add("boton-menu");
+        salir.setOnAction(event -> stage.close());
+
+        VBox panel = new VBox(20, resultado, mensaje, volver, salir);
+        panel.setAlignment(Pos.CENTER);
+        panel.setMaxSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        panel.getStyleClass().add("panel-final");
+
+        StackPane root = new StackPane(panel);
+        root.getStyleClass().add("pantalla-fin");
+
+        Scene escenaFinal = new Scene(root, 1000, 700);
+        escenaFinal.getStylesheets().addAll(
+                getClass().getResource("/styles/styles.css").toExternalForm(),
+                getClass().getResource("/styles/fin.css").toExternalForm()
         );
 
         stage.setScene(escenaFinal);

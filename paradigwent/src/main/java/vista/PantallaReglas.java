@@ -46,10 +46,9 @@ public class PantallaReglas {
                 700
         );
 
-        scene.getStylesheets().add(
-                getClass()
-                        .getResource("/styles/styles.css")
-                        .toExternalForm()
+        scene.getStylesheets().addAll(
+                getClass().getResource("/styles/styles.css").toExternalForm(),
+                getClass().getResource("/styles/reglas.css").toExternalForm()
         );
 
         stage.setScene(scene);

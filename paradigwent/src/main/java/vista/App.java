@@ -1,24 +1,18 @@
 package vista;
 
-import javafx.animation.Animation;
-import javafx.animation.FadeTransition;
-import javafx.animation.ScaleTransition;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.*;
+import javafx.scene.image.*;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import modelo.*;
 import modelo.loader.*;
-
 
 public class App extends Application {
 
@@ -71,7 +65,11 @@ public class App extends Application {
 
         Scene scene = new Scene(root, 1000, 700);
 
-        scene.getStylesheets().add(getClass().getResource("/styles/bienvenida.css").toExternalForm());
+        scene.getStylesheets().addAll(
+                getClass().getResource("/styles/styles.css").toExternalForm(),
+                getClass().getResource("/styles/bienvenida.css").toExternalForm()
+
+        );
 
         FadeTransition fade = new FadeTransition(Duration.millis(900), menu);
 
