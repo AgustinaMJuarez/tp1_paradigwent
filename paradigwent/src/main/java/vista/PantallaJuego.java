@@ -356,7 +356,15 @@ public class PantallaJuego {
         vidasEnemigoLabel.setText(
                 corazones(partida.getEnemigo().getVidas())
         );
-//        climaLabel.setText();
+
+        Clima clima = partida.getTablero().getClima();
+
+        if (clima == null) {
+            climaLabel.setText("Sin clima");
+        } else {
+            climaLabel.setText(clima.getNombre());
+        }
+
         rondaLabel.setText("RONDA " + partida.getNumeroRonda());
         fuerzaJugadorLabel.setText(
                 "Fuerza: " + jugadorVista.calcularFuerza(partida.getTablero())
