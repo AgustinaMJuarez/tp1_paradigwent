@@ -7,12 +7,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
+import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-
 
 import modelo.*;
 import modelo.loader.*;
@@ -74,6 +74,30 @@ public class App extends Application {
 
         );
 
+        Media musica =
+                new Media(
+                        getClass()
+                                .getResource("/sonidos/bienvenida.mp3")
+                                .toExternalForm()
+                );
+
+        MediaPlayer reproductor =
+                new MediaPlayer(musica);
+
+        reproductor.setCycleCount(
+                MediaPlayer.INDEFINITE
+        );
+
+        reproductor.setVolume(0.25);
+
+        reproductor.play();
+
+        AudioClip sonidoClick =
+                new AudioClip(
+                        getClass()
+                                .getResource("/sonidos/clicSelection.wav")
+                                .toExternalForm()
+                );
         FadeTransition fade = new FadeTransition(Duration.millis(900), menu);
 
         fade.setFromValue(0);
@@ -98,9 +122,10 @@ public class App extends Application {
 
         botonSalir.setOnAction(event -> stage.close());
 
-        botonJugar.setOnAction(
-                event -> iniciarJuego(stage)
-        );
+        botonJugar.setOnAction(event -> {
+            sonidoClick.play();
+            iniciarJuego(stage);
+        });
 
         botonReglas.setOnAction(
                 event -> {
