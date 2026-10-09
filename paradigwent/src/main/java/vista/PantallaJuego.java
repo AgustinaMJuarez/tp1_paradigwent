@@ -57,7 +57,8 @@ public class PantallaJuego {
         scene.getStylesheets().addAll(
                 getClass().getResource("/styles/styles.css").toExternalForm(),
                 getClass().getResource("/styles/juego.css").toExternalForm(),
-                getClass().getResource("/styles/fin.css").toExternalForm()
+                getClass().getResource("/styles/fin.css").toExternalForm(),
+                getClass().getResource("/styles/facciones.css").toExternalForm()
 
         );
 
@@ -113,7 +114,10 @@ public class PantallaJuego {
         );
 
         enemigo.setAlignment(Pos.CENTER);
-        enemigo.getStyleClass().add("informacion-jugador");
+        enemigo.getStyleClass().addAll(
+                "informacion-jugador",
+                claseFaccion(partida.getEnemigo().getFaccion())
+        );
 
         return enemigo;
     }
@@ -140,7 +144,10 @@ public class PantallaJuego {
         );
 
         jugador.setAlignment(Pos.CENTER);
-        jugador.getStyleClass().add("informacion-jugador");
+        jugador.getStyleClass().addAll(
+                "informacion-jugador",
+                claseFaccion(jugadorVista.getFaccion())
+        );
 
         return jugador;
     }
@@ -270,7 +277,10 @@ public class PantallaJuego {
         }
 
         Button nombreCarta = new Button(texto);
-        nombreCarta.getStyleClass().add("carta");
+        nombreCarta.getStyleClass().addAll(
+                "carta",
+                claseFaccion(jugadorVista.getFaccion())
+        );
 
         nombreCarta.setOnAction(event -> {
             partida.jugarCarta(carta);
@@ -331,6 +341,10 @@ public class PantallaJuego {
 
     private String corazones(int vidas) {
         return "♥ ".repeat(vidas);
+    }
+
+    private String claseFaccion(Faccion faccion) {
+        return "faccion-" + faccion.name().toLowerCase();
     }
 
     private void actualizarVista() {
@@ -399,7 +413,10 @@ public class PantallaJuego {
                     + criatura.getFuerza();
 
             Label carta = new Label(texto);
-            carta.getStyleClass().add("criatura");
+            carta.getStyleClass().addAll(
+                    "criatura",
+                    claseFaccion(jugador.getFaccion())
+            );
 
             linea.getChildren().add(carta);
         }

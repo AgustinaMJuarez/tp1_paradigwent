@@ -36,6 +36,10 @@ public class Jugador {
         return mazo;
     }
 
+    public Faccion getFaccion() {
+        return mazo.getFaccion();
+    }
+
     public int getVidas() {
         return vidas;
     }

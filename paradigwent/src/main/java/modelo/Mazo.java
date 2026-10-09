@@ -30,5 +30,9 @@ public class Mazo {
     public List<Carta> getCartas() {
         return Collections.unmodifiableList(cartas);
     }
+
+    public Faccion getFaccion() {
+        return faccion;
+    }
 }
 
