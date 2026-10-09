@@ -154,8 +154,8 @@ public class PantallaJuego {
 
     private VBox crearMazoYDescarte() {
 
-        Button mazo = new Button("MAZO");
-        Button descarte = new Button("DESCARTE");
+        Label mazo = new Label("MAZO");
+        Label descarte = new Label("DESCARTE");
 
         mazo.getStyleClass().add("pila");
         descarte.getStyleClass().add("pila");
