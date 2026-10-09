@@ -1,5 +1,6 @@
 package vista;
 
+import audio.GestorSonido;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -16,9 +17,11 @@ public class PantallaReglas {
 
     private static final String TEXTO_REGLAS = "REGLAS";
     private final Stage stage;
+    private final GestorSonido sonido;
 
-    public PantallaReglas(Stage stage) {
+    public PantallaReglas(Stage stage, GestorSonido sonido) {
         this.stage = stage;
+        this.sonido = sonido;
     }
 
     public void mostrar() {
@@ -115,7 +118,10 @@ public class PantallaReglas {
         volver.getStyleClass().add("boton-reglas");
 
         volver.setOnAction(
-                event -> volverAlMenu()
+                event -> {
+                    volverAlMenu();
+                    sonido.reproducirClick();
+                }
         );
 
         VBox contenido = new VBox(

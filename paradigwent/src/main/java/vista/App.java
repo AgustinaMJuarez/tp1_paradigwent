@@ -1,5 +1,6 @@
 package vista;
 
+import audio.GestorSonido;
 import javafx.animation.*;
 import javafx.application.Application;
 import javafx.geometry.Pos;
@@ -7,12 +8,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
 import javafx.scene.layout.*;
-import javafx.scene.media.AudioClip;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import javafx.util.Duration;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+
 
 import modelo.*;
 import modelo.loader.*;
@@ -22,9 +21,12 @@ public class App extends Application {
     private static final String TEXTO_JUGAR = "JUGAR";
     private static final String TEXTO_REGLAS = "REGLAS";
     private static final String TEXTO_SALIR = "SALIR";
+    private final GestorSonido sonidos = new GestorSonido();
 
     @Override
     public void start(Stage stage) {
+
+        sonidos.reproducirMusica();
 
         Font.loadFont(getClass().getResourceAsStream("/fonts/CinzelDecorative-Bold.ttf"),54);
         Font.loadFont(getClass().getResourceAsStream("/fonts/Montserrat-Regular.ttf"),17);
@@ -74,30 +76,6 @@ public class App extends Application {
 
         );
 
-        Media musica =
-                new Media(
-                        getClass()
-                                .getResource("/sonidos/bienvenida.mp3")
-                                .toExternalForm()
-                );
-
-        MediaPlayer reproductor =
-                new MediaPlayer(musica);
-
-        reproductor.setCycleCount(
-                MediaPlayer.INDEFINITE
-        );
-
-        reproductor.setVolume(0.25);
-
-        reproductor.play();
-
-        AudioClip sonidoClick =
-                new AudioClip(
-                        getClass()
-                                .getResource("/sonidos/clicSelection.wav")
-                                .toExternalForm()
-                );
         FadeTransition fade = new FadeTransition(Duration.millis(900), menu);
 
         fade.setFromValue(0);
@@ -120,16 +98,20 @@ public class App extends Application {
         agregarAnimacionHover(botonReglas);
         agregarAnimacionHover(botonSalir);
 
-        botonSalir.setOnAction(event -> stage.close());
+        botonSalir.setOnAction(event -> {
+            sonidos.reproducirClick();
+            stage.close();
+        });
 
         botonJugar.setOnAction(event -> {
-            sonidoClick.play();
+            sonidos.reproducirClick();
             iniciarJuego(stage);
         });
 
         botonReglas.setOnAction(
                 event -> {
-                    PantallaReglas pantallaReglas = new PantallaReglas(stage);
+                    sonidos.reproducirClick();
+                    PantallaReglas pantallaReglas = new PantallaReglas(stage, sonidos);
                     pantallaReglas.mostrar();
                 }
         );
@@ -181,7 +163,8 @@ public class App extends Application {
                 new PantallaJuego(
                         stage,
                         partida,
-                        jugador
+                        jugador,
+                        sonidos
                 );
 
         pantallaJuego.mostrar();

@@ -1,5 +1,6 @@
 package vista;
 
+import audio.GestorSonido;
 import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -16,6 +17,7 @@ public class PantallaJuego {
     private final Stage stage;
     private final Partida partida;
     private final Jugador jugadorVista;
+    private final GestorSonido sonidos;
 
     private Label vidasJugadorLabel;
     private Label vidasEnemigoLabel;
@@ -36,10 +38,11 @@ public class PantallaJuego {
     private HBox distanciaJugador;
     private HBox cuerpoJugador;
 
-    public PantallaJuego(Stage stage, Partida partida, Jugador jugador) {
+    public PantallaJuego(Stage stage, Partida partida, Jugador jugador, GestorSonido sonidos) {
         this.stage = stage;
         this.partida = partida;
         this.jugadorVista = jugador;
+        this.sonidos = sonidos;
     }
 
     public void mostrar() {
@@ -286,12 +289,14 @@ public class PantallaJuego {
         rendirse.getStyleClass().add("boton-juego");
 
         pasar.setOnAction(event -> {
+            sonidos.reproducirClick();
             partida.pasarTurno();
             actualizarJuego();
         });
 
 
         rendirse.setOnAction(event -> {
+            sonidos.reproducirClick();
             jugadorVista.rendirse();
             actualizarJuego();
         });
@@ -481,11 +486,17 @@ public class PantallaJuego {
 
         Button volver = new Button("VOLVER AL MENÚ");
         volver.getStyleClass().addAll("boton-menu", "boton-primario");
-        volver.setOnAction(event -> new App().start(stage));
+        volver.setOnAction(event -> {
+            sonidos.reproducirClick();
+            new App().start(stage);
+        });
 
         Button salir = new Button("SALIR");
         salir.getStyleClass().add("boton-menu");
-        salir.setOnAction(event -> stage.close());
+        salir.setOnAction(event -> {
+            sonidos.reproducirMusica();
+            stage.close();
+        });
 
         VBox panel = new VBox(20, resultado, mensajeLabel, volver, salir);
         panel.setAlignment(Pos.CENTER);
