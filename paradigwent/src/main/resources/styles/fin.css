@@ -1,0 +1,42 @@
+.pantalla-fin {
+    -fx-background-color: #151233;
+}
+
+.panel-final {
+    -fx-padding: 45px 70px 50px 70px;
+
+    -fx-background-color: linear-gradient(to bottom, rgba(74, 60, 140, 0.60), rgba(34, 28, 74, 0.75));
+    -fx-background-radius: 28px;
+
+    -fx-border-color: linear-gradient(to bottom, rgba(255, 214, 160, 0.40), rgba(255, 255, 255, 0.10));
+    -fx-border-width: 1px;
+    -fx-border-radius: 28px;
+
+    -fx-effect: dropshadow(gaussian, rgba(10, 8, 30, 0.50), 36, 0.25, 0, 12);
+}
+
+.resultado {
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-size: 46px;
+}
+
+.resultado-victoria {
+    -fx-text-fill: #ffe2b0;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.85), 26, 0.35, 0, 0);
+}
+
+.resultado-derrota {
+    -fx-text-fill: #f5b3c0;
+    -fx-effect: dropshadow(gaussian, rgba(231, 109, 130, 0.60), 22, 0.30, 0, 0);
+}
+
+.mensaje-final {
+    -fx-font-size: 15px;
+    -fx-text-fill: -color-text-soft;
+    -fx-padding: 0 0 12px 0;
+}
+
+.panel-final .boton-menu {
+    -fx-pref-width: 240px;
+    -fx-pref-height: 52px;
+}

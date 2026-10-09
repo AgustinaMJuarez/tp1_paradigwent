@@ -1,0 +1,36 @@
+.contenido-reglas {
+    -fx-pref-width: 850px;
+    -fx-padding: 25px 55px;
+
+    -fx-background-color: linear-gradient(to bottom, rgba(74, 60, 140, 0.55), rgba(34, 28, 74, 0.68));
+    -fx-background-radius: 24px;
+
+    -fx-border-color: linear-gradient(to bottom, rgba(255, 214, 160, 0.40), rgba(255, 255, 255, 0.10));
+    -fx-border-width: 1px;
+    -fx-border-radius: 24px;
+}
+
+.titulo-reglas {
+    -fx-font-size: 48px;
+    -fx-padding: 0 0 15px 0;
+}
+
+.subtitulo-reglas {
+    -fx-font-size: 21px;
+    -fx-text-fill: -color-accent;
+    -fx-effect: dropshadow(gaussian, rgba(20, 15, 50, 0.50), 4, 0.2, 0, 1);
+}
+
+.texto-reglas {
+    -fx-font-size: 16px;
+    -fx-text-fill: -color-text;
+    -fx-line-spacing: 7px;
+    -fx-text-alignment: center;
+    -fx-effect: dropshadow(gaussian, rgba(20, 15, 50, 0.45), 3, 0.2, 0, 1);
+}
+
+.boton-reglas {
+    -fx-pref-width: 220px;
+    -fx-pref-height: 50px;
+    -fx-padding: 10px 20px;
+}

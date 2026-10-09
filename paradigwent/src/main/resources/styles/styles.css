@@ -1,0 +1,98 @@
+@font-face {
+    font-family: 'Montserrat SemiBold';
+    src: url('../fonts/Montserrat-SemiBold.ttf');
+}
+
+.root {
+    -fx-font-family: "Montserrat SemiBold";
+    -fx-focus-color: transparent;
+    -fx-faint-focus-color: transparent;
+
+    -color-accent: #ffc983;
+    -color-accent-strong: #f2a65a;
+    -color-on-accent: #2b1d45;
+
+    -color-text: #f6f1ff;
+    -color-text-soft: #d3c9f5;
+    -color-text-muted: rgba(211, 201, 245, 0.78);
+
+    -color-danger: #e76d82;
+
+    -color-panel-top: rgba(74, 60, 140, 0.55);
+    -color-panel-bottom: rgba(34, 28, 74, 0.68);
+
+    -color-surface-top: rgba(66, 55, 115, 0.94);
+    -color-surface-bottom: rgba(34, 28, 74, 0.94);
+
+    -color-border: rgba(255, 255, 255, 0.18);
+    -color-border-warm: rgba(255, 214, 160, 0.40);
+}
+
+.titulo,
+.titulo-reglas {
+    -fx-font-family: "Cinzel Decorative";
+    -fx-text-fill: -color-text;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.55), 22, 0.25, 0, 0);
+}
+
+.titulo {
+    -fx-font-size: 52px;
+}
+
+.subtitulo {
+    -fx-font-size: 14px;
+    -fx-text-fill: -color-text-soft;
+    -fx-effect: dropshadow(gaussian, rgba(20, 15, 50, 0.50), 4, 0.2, 0, 1);
+}
+
+.boton-menu,
+.boton-reglas {
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 18px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 18px;
+
+    -fx-text-fill: -color-text;
+    -fx-font-size: 16px;
+
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(10, 8, 30, 0.30), 10, 0.2, 0, 4);
+}
+
+.boton-menu:hover,
+.boton-menu:focused,
+.boton-reglas:hover,
+.boton-reglas:focused {
+    -fx-background-color: rgba(255, 201, 131, 0.16);
+    -fx-border-color: -color-accent;
+    -fx-text-fill: #fff3dc;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.45), 16, 0.3, 0, 0);
+}
+
+.boton-menu:pressed,
+.boton-reglas:pressed {
+    -fx-background-color: rgba(255, 201, 131, 0.28);
+    -fx-translate-y: 1px;
+}
+
+.boton-primario {
+    -fx-background-color: linear-gradient(to bottom, #ffd9a0, #f2a65a);
+    -fx-border-color: transparent;
+    -fx-text-fill: -color-on-accent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 170, 90, 0.40), 16, 0.25, 0, 4);
+}
+
+.boton-primario:hover,
+.boton-primario:focused {
+    -fx-background-color: linear-gradient(to bottom, #ffe6bd, #ffb766);
+    -fx-border-color: transparent;
+    -fx-text-fill: -color-on-accent;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.70), 22, 0.35, 0, 0);
+}
+
+.boton-primario:pressed {
+    -fx-background-color: linear-gradient(to bottom, #f2a65a, #e48f3f);
+    -fx-translate-y: 1px;
+}
