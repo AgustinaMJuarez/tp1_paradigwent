@@ -21,6 +21,7 @@ public class App extends Application {
     private static final String TEXTO_JUGAR = "JUGAR";
     private static final String TEXTO_REGLAS = "REGLAS";
     private static final String TEXTO_SALIR = "SALIR";
+    private static final String NOMBRE_JUEGO = "PARADIGWENT";
     private final GestorSonido sonidos = new GestorSonido();
 
     @Override
@@ -38,7 +39,7 @@ public class App extends Application {
         background.setFitHeight(700);
         background.setPreserveRatio(false);
 
-        Label titulo = new Label("PARADIGWENT");
+        Label titulo = new Label(NOMBRE_JUEGO);
         Label subtitulo = new Label("Paradigmas de Programación · FIUBA");
 
         Button botonJugar = new Button(TEXTO_JUGAR);
@@ -116,7 +117,7 @@ public class App extends Application {
                 }
         );
 
-        stage.setTitle("Paradigwent");
+        stage.setTitle(NOMBRE_JUEGO);
         stage.setScene(scene);
         stage.show();
     }
