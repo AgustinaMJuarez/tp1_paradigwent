@@ -24,8 +24,7 @@ public class Automata {
             return true;
         }
 
-//        chequear esto q creo q no funca
-        if (fuerzaAutomata >= fuerzaOponente + 1) {
+        if (fuerzaAutomata >= fuerzaOponente + 8) {
             return true;
         }
 
