@@ -24,7 +24,7 @@ public class Automata {
             return true;
         }
 
-        if (fuerzaAutomata >= fuerzaOponente + 8) {
+        if (fuerzaOponente >= 8 && fuerzaAutomata >= fuerzaOponente + 8) {
             return true;
         }
 
@@ -35,12 +35,11 @@ public class Automata {
         return false;
     }
 
-//    ver si lo dejamos es medio bruto pero da mas chance a ganar (si lo dejamos podria estar en un if adentro de conveienPasar creo, lo puse separado para q se enteidna)
     private boolean noPuedeAlcanzar(Partida partida) {
         int fuerzaAutomata = jugador.calcularFuerza(partida.getTablero());
         int fuerzaOponente = oponente.calcularFuerza(partida.getTablero());
 
-        return fuerzaAutomata >= 10 && fuerzaOponente >= fuerzaAutomata + 8;
+        return fuerzaAutomata >= 8 && fuerzaOponente >= fuerzaAutomata + 8;
     }
 
 

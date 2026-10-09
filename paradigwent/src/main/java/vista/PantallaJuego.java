@@ -18,6 +18,7 @@ public class PantallaJuego {
     private final Partida partida;
     private final Jugador jugadorVista;
     private final GestorSonido sonidos;
+    private boolean enemigoPaso;
 
     private Label vidasJugadorLabel;
     private Label vidasEnemigoLabel;
@@ -374,10 +375,15 @@ public class PantallaJuego {
                 "Fuerza: " + partida.getEnemigo().calcularFuerza(partida.getTablero())
         );
         if (partida.getJugadorActual() == jugadorVista) {
-            turnoLabel.setText("TU TURNO");
+            if (enemigoPaso) {
+                turnoLabel.setText("¡EL ENEMIGO PASÓ! TU TURNO");
+            } else {
+                turnoLabel.setText("TU TURNO");
+            }
         } else {
             turnoLabel.setText("TURNO DEL ENEMIGO");
         }
+
         boolean turnoJugador =
                 partida.getJugadorActual() == jugadorVista;
 
@@ -395,10 +401,17 @@ public class PantallaJuego {
                     new PauseTransition(Duration.seconds(1));
 
             pausa.setOnFinished(event -> {
+                boolean habiaPasado = partida.getEnemigo().yaPaso();
+
                 partida.ejecutarTurnoEnemigo();
+                boolean acabaDePasar = !habiaPasado && partida.getEnemigo().yaPaso();
+                if (acabaDePasar) {
+                    enemigoPaso = true;
+                }
                 actualizarVista();
                 manejarTurnoEnemigo();
             });
+
 
             pausa.play();
         }
