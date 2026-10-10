@@ -1,0 +1,93 @@
+.dialogo-efecto {
+    -fx-background-color: transparent;
+    -fx-padding: 30px;
+    -fx-font-family: "Montserrat SemiBold";
+}
+
+.panel-efecto {
+    -fx-padding: 32px 48px 36px 48px;
+
+    -fx-background-color: linear-gradient(to bottom, rgba(74, 60, 140, 0.96), rgba(34, 28, 74, 0.98));
+    -fx-background-radius: 24px;
+
+    -fx-border-color: linear-gradient(to bottom, rgba(255, 214, 160, 0.55), rgba(255, 255, 255, 0.12));
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 24px;
+
+    -fx-effect: dropshadow(gaussian, rgba(10, 8, 30, 0.65), 28, 0.30, 0, 8);
+}
+
+.panel-efecto.faccion-playa {
+    -fx-border-color: rgba(77, 208, 225, 0.70);
+}
+
+.panel-efecto.faccion-bosque {
+    -fx-border-color: rgba(139, 212, 95, 0.70);
+}
+
+.panel-efecto.faccion-constitucion {
+    -fx-border-color: rgba(255, 143, 112, 0.70);
+}
+
+.titulo-efecto {
+    -fx-font-family: "Cinzel Decorative";
+    -fx-font-size: 30px;
+    -fx-text-fill: #f6f1ff;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.55), 18, 0.25, 0, 0);
+}
+
+.subtitulo-efecto {
+    -fx-font-size: 14px;
+    -fx-text-fill: #ffc983;
+}
+
+.texto-efecto {
+    -fx-font-size: 12px;
+    -fx-text-fill: rgba(211, 201, 245, 0.80);
+    -fx-padding: 0 0 8px 0;
+}
+
+.boton-linea {
+    -fx-pref-width: 290px;
+    -fx-pref-height: 52px;
+
+    -fx-background-color: rgba(255, 255, 255, 0.08);
+    -fx-background-radius: 16px;
+
+    -fx-border-color: rgba(255, 255, 255, 0.35);
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 16px;
+
+    -fx-text-fill: #f6f1ff;
+    -fx-font-size: 15px;
+
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(10, 8, 30, 0.30), 10, 0.2, 0, 4);
+}
+
+.boton-linea:hover,
+.boton-linea:focused {
+    -fx-background-color: rgba(255, 201, 131, 0.18);
+    -fx-border-color: #ffc983;
+    -fx-text-fill: #fff3dc;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.45), 16, 0.3, 0, 0);
+}
+
+.boton-linea:pressed {
+    -fx-background-color: rgba(255, 201, 131, 0.30);
+    -fx-translate-y: 1px;
+}
+
+.boton-cancelar {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+    -fx-text-fill: rgba(211, 201, 245, 0.80);
+    -fx-font-size: 12px;
+    -fx-underline: true;
+    -fx-cursor: hand;
+}
+
+.boton-cancelar:hover,
+.boton-cancelar:focused {
+    -fx-text-fill: #ffffff;
+}

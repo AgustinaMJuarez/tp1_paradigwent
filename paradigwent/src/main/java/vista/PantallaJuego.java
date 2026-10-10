@@ -4,6 +4,9 @@ import audio.GestorSonido;
 import javafx.animation.*;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.stage.StageStyle;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -303,7 +306,7 @@ public class PantallaJuego {
 
         nombreCarta.setOnAction(event -> {
             if (carta.requiereLinea()) {
-                Optional<TipoAtaque> linea = elegirLinea();
+                Optional<TipoAtaque> linea = elegirLinea(carta);
                 if (linea.isEmpty()) {
                     return;
                 }
@@ -324,12 +327,70 @@ public class PantallaJuego {
         return nombreCarta;
     }
 
-    private Optional<TipoAtaque> elegirLinea() {
-        ChoiceDialog<TipoAtaque> dialogo =
-                new ChoiceDialog<>(TipoAtaque.CUERPO_A_CUERPO, TipoAtaque.values());
-        dialogo.setTitle("Efecto");
-        dialogo.setHeaderText("Elegí la línea");
+    private Optional<TipoAtaque> elegirLinea(Carta carta) {
+
+        Dialog<TipoAtaque> dialogo = new Dialog<>();
+        dialogo.initOwner(stage);
+        dialogo.initStyle(StageStyle.TRANSPARENT);
+
+        Label titulo = new Label("ELEGÍ LA LÍNEA");
+        titulo.getStyleClass().add("titulo-efecto");
+
+        Label subtitulo = new Label("✦ " + carta.getNombre().toUpperCase() + " ✦");
+        subtitulo.getStyleClass().add("subtitulo-efecto");
+
+        Label texto = new Label("El efecto se aplicará sobre la línea que elijas.");
+        texto.getStyleClass().add("texto-efecto");
+
+        VBox contenido = new VBox(14, titulo, subtitulo, texto);
+        contenido.setAlignment(Pos.CENTER);
+        contenido.getStyleClass().addAll(
+                "panel-efecto",
+                claseFaccion(jugadorVista.getFaccion())
+        );
+
+        for (TipoAtaque tipo : TipoAtaque.values()) {
+            Button boton = new Button(
+                    iconoLinea(tipo) + "   " + tipo.name().replace('_', ' ')
+            );
+            boton.getStyleClass().add("boton-linea");
+            boton.setOnAction(event -> {
+                sonidos.reproducirClick();
+                dialogo.setResult(tipo);
+                dialogo.close();
+            });
+            contenido.getChildren().add(boton);
+        }
+
+        Button cancelar = new Button("CANCELAR");
+        cancelar.getStyleClass().add("boton-cancelar");
+        cancelar.setOnAction(event -> dialogo.close());
+        contenido.getChildren().add(cancelar);
+
+        DialogPane panel = dialogo.getDialogPane();
+        panel.setContent(contenido);
+        panel.getStyleClass().add("dialogo-efecto");
+        panel.getStylesheets().add(
+                getClass().getResource("/styles/efecto.css").toExternalForm()
+        );
+        panel.getScene().setFill(Color.TRANSPARENT);
+
+        panel.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                dialogo.close();
+            }
+        });
+
         return dialogo.showAndWait();
+    }
+
+    private String iconoLinea(TipoAtaque tipo) {
+        return switch (tipo) {
+            case CUERPO_A_CUERPO -> "⚔";
+            case DISTANCIA       -> "➶";
+            case ASEDIO          -> "♜";
+            default              -> "✦";
+        };
     }
 
     private HBox crearControles() {

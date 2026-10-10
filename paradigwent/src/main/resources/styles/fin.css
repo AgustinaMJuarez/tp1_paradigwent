@@ -1,5 +1,9 @@
 .pantalla-fin {
     -fx-background-color: #151233;
+    -fx-background-image: url("../imgs/fondo.png");
+    -fx-background-size: cover;
+    -fx-background-position: center center;
+    -fx-background-repeat: no-repeat;
 }
 
 .panel-final {
@@ -39,4 +43,10 @@
 .panel-final .boton-menu {
     -fx-pref-width: 240px;
     -fx-pref-height: 52px;
+}
+
+
+.resultado-empate {
+    -fx-text-fill: #e3dcff;
+    -fx-effect: dropshadow(gaussian, rgba(190, 175, 255, 0.60), 22, 0.30, 0, 0);
 }

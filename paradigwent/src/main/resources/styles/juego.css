@@ -57,10 +57,7 @@
     -fx-effect: dropshadow(gaussian, rgba(10, 8, 30, 0.40), 9, 0.25, 0, 3);
 }
 
-.pila {
-    -fx-alignment: center;
-}
-
+.pila:hover,
 .carta:hover,
 .boton-juego:hover {
     -fx-background-color: linear-gradient(to bottom, rgba(100, 82, 170, 0.97), rgba(52, 42, 96, 0.97));
@@ -77,12 +74,17 @@
 }
 
 .carta {
-    -fx-pref-width: 66px;
-    -fx-pref-height: 88px;
+    -fx-pref-width: 76px;
+    -fx-pref-height: 104px;
     -fx-background-radius: 9px;
     -fx-border-radius: 9px;
     -fx-border-width: 1.3px;
     -fx-font-size: 10px;
+    -fx-content-display: top;
+    -fx-graphic-text-gap: 4px;
+    -fx-wrap-text: true;
+    -fx-text-alignment: center;
+    -fx-padding: 4px;
 }
 
 .carta:hover {
@@ -156,7 +158,7 @@
 }
 
 .clima {
-    -fx-font-family: "Cinzel Bold";
+    -fx-font-family: "Cinzel Decorative";
     -fx-font-size: 14px;
     -fx-text-fill: -color-accent;
 }
@@ -193,4 +195,33 @@
     -fx-border-color: rgba(255, 214, 160, 0.35);
     -fx-border-radius: 8px;
     -fx-border-width: 1px;
+}
+
+.icono-carta {
+    -fx-font-size: 22px;
+    -fx-text-fill: #fff3dc;
+    -fx-effect: dropshadow(gaussian, rgba(255, 190, 120, 0.55), 8, 0.25, 0, 0);
+}
+
+.carta {
+    -fx-content-display: top;
+    -fx-graphic-text-gap: 2px;
+    -fx-text-alignment: center;
+}
+
+.icono-carta {
+    -fx-font-size: 16px;
+    -fx-text-fill: -color-accent;
+}
+
+.icono-carta.tipo-escarcha { -fx-text-fill: #bfe9ff; }
+.icono-carta.tipo-niebla { -fx-text-fill: #d6d3e6; }
+.icono-carta.tipo-lluvia { -fx-text-fill: #8fb8ff; }
+.icono-carta.tipo-quemadura { -fx-text-fill: #ff9a5c; }
+.icono-carta.tipo-cuerno_de_comandante { -fx-text-fill: #ffd37a; }
+
+
+.pila {
+    -fx-alignment: center;
+    -fx-cursor: default;
 }
