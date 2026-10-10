@@ -11,6 +11,7 @@ public class GestorSonido {
     private final AudioClip tirarCarta;
     private final AudioClip musicaGanador;
     private final AudioClip musicaPerdedor;
+    private final AudioClip finRound;
     private MediaPlayer musicaFondo;
 
     public GestorSonido() {
@@ -25,6 +26,8 @@ public class GestorSonido {
         musicaGanador = new AudioClip(getClass().getResource("/sonidos/win.wav").toExternalForm());
 
         musicaPerdedor = new AudioClip(getClass().getResource("/sonidos/lose.wav").toExternalForm());
+
+        finRound = new AudioClip(getClass().getResource("/sonidos/endRound.wav").toExternalForm());
 
         musicaFondo = new MediaPlayer(
                 new Media(musica.toExternalForm())
@@ -44,6 +47,8 @@ public class GestorSonido {
     public void reproducirTirarCarta() {tirarCarta.play();}
 
     public void reproducirGanador() {musicaGanador.play();}
+
+    public void reproducirFinRound() {finRound.play();}
 
     public void reproducirPerdedor() {musicaPerdedor.play();}
     public void pausarMusica() {

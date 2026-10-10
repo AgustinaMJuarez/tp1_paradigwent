@@ -19,6 +19,7 @@ public class PantallaJuego {
     private final Jugador jugadorVista;
     private final GestorSonido sonidos;
     private boolean enemigoPaso;
+    private int numeroRondaAnterior;
 
     private Label vidasJugadorLabel;
     private Label vidasEnemigoLabel;
@@ -46,6 +47,7 @@ public class PantallaJuego {
         this.partida = partida;
         this.jugadorVista = jugador;
         this.sonidos = sonidos;
+        this.numeroRondaAnterior = partida.getNumeroRonda();
     }
 
     public void mostrar() {
@@ -287,7 +289,14 @@ public class PantallaJuego {
 
         nombreCarta.setOnAction(event -> {
             partida.jugarCarta(carta);
-            sonidos.reproducirTirarCarta();
+
+            // Si la jugada cerró la ronda suena fin de ronda, si no, el de tirar carta
+            if (verificarFinDeRonda()) {
+                sonidos.reproducirFinRound();
+            } else {
+                sonidos.reproducirTirarCarta();
+            }
+
             actualizarJuego();
         });
 
@@ -305,6 +314,11 @@ public class PantallaJuego {
         pasar.setOnAction(event -> {
             sonidos.reproducirClick();
             partida.pasarTurno();
+
+            if (verificarFinDeRonda()) {
+                sonidos.reproducirFinRound();
+            }
+
             actualizarJuego();
         });
 
@@ -312,6 +326,11 @@ public class PantallaJuego {
         rendirse.setOnAction(event -> {
             sonidos.reproducirClick();
             jugadorVista.rendirse();
+
+            if (verificarFinDeRonda()) {
+                sonidos.reproducirFinRound();
+            }
+
             actualizarJuego();
         });
 
@@ -349,6 +368,24 @@ public class PantallaJuego {
 
     private String claseFaccion(Faccion faccion) {
         return "faccion-" + faccion.name().toLowerCase();
+    }
+
+    /**
+     * Detecta si cambió la ronda desde la última vez que se chequeó.
+     * Si cambió, actualiza el número de ronda guardado, resetea el flag
+     * de "enemigo pasó" y devuelve true. No reproduce sonidos: eso lo
+     * decide quien lo llama (así no se pisan con el de tirar carta).
+     */
+    private boolean verificarFinDeRonda() {
+        int numeroRondaActual = partida.getNumeroRonda();
+
+        if (numeroRondaActual > numeroRondaAnterior) {
+            numeroRondaAnterior = numeroRondaActual;
+            enemigoPaso = false;
+            return true;
+        }
+
+        return false;
     }
 
     private void actualizarVista() {
@@ -411,15 +448,19 @@ public class PantallaJuego {
 
                 int cartasDespues = partida.getEnemigo().getMano().size();
 
-                if (cartasDespues < cartasAntes) {
-                    sonidos.reproducirTirarCarta();
-                }
-
-
                 boolean acabaDePasar = !habiaPasado && partida.getEnemigo().yaPaso();
                 if (acabaDePasar) {
                     enemigoPaso = true;
                 }
+
+                // Si cerró la ronda suena fin de ronda (y resetea enemigoPaso);
+                // si no, y jugó una carta, suena el de tirar carta
+                if (verificarFinDeRonda()) {
+                    sonidos.reproducirFinRound();
+                } else if (cartasDespues < cartasAntes) {
+                    sonidos.reproducirTirarCarta();
+                }
+
                 actualizarVista();
                 manejarTurnoEnemigo();
             });
@@ -495,6 +536,7 @@ public class PantallaJuego {
         );
     }
 
+
     private void actualizarJuego() {
         actualizarVista();
 
@@ -548,7 +590,7 @@ public class PantallaJuego {
         Button salir = new Button("SALIR");
         salir.getStyleClass().add("boton-menu");
         salir.setOnAction(event -> {
-            sonidos.reproducirMusica();
+            sonidos.pausarMusica();
             stage.close();
         });
 
