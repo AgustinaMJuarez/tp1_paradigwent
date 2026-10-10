@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
+import javafx.stage.Modality;
 import javafx.stage.StageStyle;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -16,6 +17,7 @@ import modelo.*;
 import modelo.cartas.*;
 
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class PantallaJuego {
 
@@ -64,30 +66,24 @@ public class PantallaJuego {
                 700
         );
 
-        scene.getStylesheets().addAll(
-                verificarCss("/styles/styles.css", scene),
-                verificarCss("/styles/juego.css", scene),
-                verificarCss("/styles/fin.css", scene),
-                verificarCss("/styles/facciones.css", scene)
-        );
+        agregarCss(scene, "/styles/styles.css");
+        agregarCss(scene, "/styles/juego.css");
+        agregarCss(scene, "/styles/facciones.css");
 
         stage.setScene(scene);
         actualizarVista();
         manejarTurnoEnemigo();
     }
 
-    private String verificarCss(String ruta, Scene scene){
-        java.net.URL resourceUrl = getClass().getResource(ruta);
-
-        if (resourceUrl != null) {
-            String css = resourceUrl.toExternalForm();
-            scene.getStylesheets().add(css);
-        } else {
-
-            System.err.println("Error: archivo CSS no encontrado!");
+    private void agregarCss(Scene scene, String ruta) {
+        java.net.URL url = getClass().getResource(ruta);
+        if (url == null) {
+            System.err.println("CSS no encontrado: " + ruta);
+            return;
         }
-        return ruta;
+        scene.getStylesheets().add(url.toExternalForm());
     }
+
 
     private BorderPane crearTablero() {
         BorderPane tablero = new BorderPane();
@@ -329,9 +325,12 @@ public class PantallaJuego {
 
     private Optional<TipoAtaque> elegirLinea(Carta carta) {
 
-        Dialog<TipoAtaque> dialogo = new Dialog<>();
+        Stage dialogo = new Stage();
         dialogo.initOwner(stage);
+        dialogo.initModality(Modality.APPLICATION_MODAL);
         dialogo.initStyle(StageStyle.TRANSPARENT);
+
+        AtomicReference<TipoAtaque> elegida = new AtomicReference<>();
 
         Label titulo = new Label("ELEGÍ LA LÍNEA");
         titulo.getStyleClass().add("titulo-efecto");
@@ -356,7 +355,7 @@ public class PantallaJuego {
             boton.getStyleClass().add("boton-linea");
             boton.setOnAction(event -> {
                 sonidos.reproducirClick();
-                dialogo.setResult(tipo);
+                elegida.set(tipo);
                 dialogo.close();
             });
             contenido.getChildren().add(boton);
@@ -367,21 +366,30 @@ public class PantallaJuego {
         cancelar.setOnAction(event -> dialogo.close());
         contenido.getChildren().add(cancelar);
 
-        DialogPane panel = dialogo.getDialogPane();
-        panel.setContent(contenido);
-        panel.getStyleClass().add("dialogo-efecto");
-        panel.getStylesheets().add(
+        StackPane raiz = new StackPane(contenido);
+        raiz.getStyleClass().add("dialogo-efecto");
+
+        Scene escena = new Scene(raiz);
+        escena.setFill(Color.TRANSPARENT);
+        escena.getStylesheets().add(
                 getClass().getResource("/styles/efecto.css").toExternalForm()
         );
-        panel.getScene().setFill(Color.TRANSPARENT);
 
-        panel.addEventFilter(javafx.scene.input.KeyEvent.KEY_PRESSED, event -> {
+        escena.setOnKeyPressed(event -> {
             if (event.getCode() == KeyCode.ESCAPE) {
                 dialogo.close();
             }
         });
 
-        return dialogo.showAndWait();
+        dialogo.setOnShown(event -> {
+            dialogo.setX(stage.getX() + (stage.getWidth() - dialogo.getWidth()) / 2);
+            dialogo.setY(stage.getY() + (stage.getHeight() - dialogo.getHeight()) / 2);
+        });
+
+        dialogo.setScene(escena);
+        dialogo.showAndWait();
+
+        return Optional.ofNullable(elegida.get());
     }
 
     private String iconoLinea(TipoAtaque tipo) {
@@ -677,11 +685,9 @@ public class PantallaJuego {
         root.getStyleClass().add("pantalla-fin");
 
         Scene escenaFinal = new Scene(root, 1000, 700);
-        escenaFinal.getStylesheets().addAll(
-                verificarCss("/styles/styles.css", escenaFinal),
-                verificarCss("/styles/fin.css", escenaFinal)
-        );
 
+        agregarCss(escenaFinal, "/styles/styles.css");
+        agregarCss(escenaFinal,"/styles/fin.css");
         stage.setScene(escenaFinal);
     }
 
