@@ -3,44 +3,31 @@ package audio;
 import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
-import modelo.cartas.Carta;
-import modelo.cartas.Clima;
-import modelo.cartas.Efecto;
 
 import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class GestorSonido {
-
     private final AudioClip click;
-    private final MediaPlayer musicaFondo;
-
-    private final Map<Class<? extends Carta>, AudioClip> sonidosCartas;
+    private final AudioClip tirarCarta;
+    private final AudioClip musicaGanador;
+    private final AudioClip musicaPerdedor;
+    private final AudioClip finRound;
+    private MediaPlayer musicaFondo;
 
     public GestorSonido() {
-
-        click = cargarAudioClip("/sonidos/clicSelection.wav");
-
-        sonidosCartas = new HashMap<>();
-
-        sonidosCartas.put(
-                Clima.class,
-                cargarAudioClip("/sonidos/clima.wav")
-        );
-
-        sonidosCartas.put(
-                Efecto.class,
-                cargarAudioClip("/sonidos/efecto.wav")
+        click = new AudioClip(
+                getClass().getResource("/sonidos/clicSelection.wav").toExternalForm()
         );
 
         URL musica = getClass().getResource("/sonidos/bienvenida.mp3");
 
-        if (musica == null) {
-            throw new IllegalStateException(
-                    "No se encontró /sonidos/bienvenida.mp3"
-            );
-        }
+        tirarCarta = new AudioClip(getClass().getResource("/sonidos/cardThrown.wav").toExternalForm());
+
+        musicaGanador = new AudioClip(getClass().getResource("/sonidos/win.wav").toExternalForm());
+
+        musicaPerdedor = new AudioClip(getClass().getResource("/sonidos/lose.wav").toExternalForm());
+
+        finRound = new AudioClip(getClass().getResource("/sonidos/endRound.wav").toExternalForm());
 
         musicaFondo = new MediaPlayer(
                 new Media(musica.toExternalForm())
@@ -49,36 +36,21 @@ public class GestorSonido {
         musicaFondo.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
-    private AudioClip cargarAudioClip(String ruta) {
-
-        URL recurso = getClass().getResource(ruta);
-
-        if (recurso == null) {
-            throw new IllegalStateException(
-                    "No se encontró el sonido: " + ruta
-            );
-        }
-
-        return new AudioClip(recurso.toExternalForm());
-    }
-
     public void reproducirClick() {
         click.play();
-    }
-
-    public void reproducirSonidoCarta(Carta carta) {
-
-        AudioClip sonido = sonidosCartas.get(carta.getClass());
-
-        if (sonido != null) {
-            sonido.play();
-        }
     }
 
     public void reproducirMusica() {
         musicaFondo.play();
     }
+    
+    public void reproducirTirarCarta() {tirarCarta.play();}
 
+    public void reproducirGanador() {musicaGanador.play();}
+
+    public void reproducirFinRound() {finRound.play();}
+
+    public void reproducirPerdedor() {musicaPerdedor.play();}
     public void pausarMusica() {
         musicaFondo.pause();
     }

@@ -29,7 +29,7 @@ public class Jugador {
     }
 
     public List<Carta> getMano() {
-        return mano;
+        return Collections.unmodifiableList(mano);
     }
 
     public Mazo getMazo() {
