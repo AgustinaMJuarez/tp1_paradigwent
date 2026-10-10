@@ -16,6 +16,10 @@ public class Mazo {
     }
 
     public Carta robarCarta() {
+        if (cartas.isEmpty()) {
+            return null;
+        }
+
         return cartas.remove(0);
     }
 

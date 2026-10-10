@@ -287,6 +287,7 @@ public class PantallaJuego {
 
         nombreCarta.setOnAction(event -> {
             partida.jugarCarta(carta);
+            sonidos.reproducirTirarCarta();
             actualizarJuego();
         });
 
@@ -404,8 +405,17 @@ public class PantallaJuego {
 
             pausa.setOnFinished(event -> {
                 boolean habiaPasado = partida.getEnemigo().yaPaso();
+                int cartasAntes = partida.getEnemigo().getMano().size();
 
                 partida.ejecutarTurnoEnemigo();
+
+                int cartasDespues = partida.getEnemigo().getMano().size();
+
+                if (cartasDespues < cartasAntes) {
+                    sonidos.reproducirTirarCarta();
+                }
+
+
                 boolean acabaDePasar = !habiaPasado && partida.getEnemigo().yaPaso();
                 if (acabaDePasar) {
                     enemigoPaso = true;
@@ -418,6 +428,8 @@ public class PantallaJuego {
             pausa.play();
         }
     }
+
+
 
     private void actualizarLinea(
             HBox linea,
@@ -504,12 +516,14 @@ public class PantallaJuego {
         String mensaje;
 
         if (gano) {
+            sonidos.reproducirGanador();
             titulo = "¡GANASTE!";
             mensaje = "Fuiste el último jugador con vidas restantes.";
         } else if (empate) {
             titulo = "¡EMPATE!";
             mensaje = "Ambos jugadores se quedaron sin vidas.";
         } else {
+            sonidos.reproducirPerdedor();
             titulo = "¡GANÓ EL ENEMIGO!";
             mensaje = "El enemigo se quedó con la partida. ¡Probá de nuevo!";
         }

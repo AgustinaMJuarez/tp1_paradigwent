@@ -87,7 +87,7 @@ public class PantallaReglas {
 
         Label comoJugar = new Label(
                 "— Cada jugador comienza con 10 cartas.\n" +
-                        "— Cada jugador comienza con 3 vidas.\n" +
+                        "— Cada jugador comienza con 2 vidas.\n" +
                         "— Los jugadores se turnan para jugar cartas.\n" +
                         "— En cada turno se puede jugar una carta o pasar."
         );
