@@ -43,10 +43,10 @@ public class Automata {
     }
 
 
-    public void jugarTurno(Partida partida) {
+    public Carta jugarTurno(Partida partida) {
         if (convienePasar(partida)) {
             partida.pasarTurno();
-            return;
+            return null;
         }
         Carta carta = elegirCarta();
 
@@ -55,6 +55,8 @@ public class Automata {
         } else {
             partida.pasarTurno();
         }
+
+        return carta;
     }
 
     private Carta elegirCarta() {

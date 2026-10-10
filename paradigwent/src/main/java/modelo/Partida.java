@@ -93,14 +93,16 @@ public class Partida {
         manejarRondas();
     }
 
-    private void manejarTurno() {
+    private Carta manejarTurno() {
         if (rondaActual.getJugadorActual() == enemigo) {
-            automata.jugarTurno(this);
+            return automata.jugarTurno(this);
         }
+
+        return null;
     }
 
-    public void ejecutarTurnoEnemigo() {
-        manejarTurno();
+    public Carta ejecutarTurnoEnemigo() {
+        return manejarTurno();
     }
 
     public Jugador getJugadorActual() {

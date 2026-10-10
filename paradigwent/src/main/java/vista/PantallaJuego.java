@@ -60,16 +60,28 @@ public class PantallaJuego {
         );
 
         scene.getStylesheets().addAll(
-                getClass().getResource("/styles/styles.css").toExternalForm(),
-                getClass().getResource("/styles/juego.css").toExternalForm(),
-                getClass().getResource("/styles/fin.css").toExternalForm(),
-                getClass().getResource("/styles/facciones.css").toExternalForm()
-
+                verificarCss("/styles/styles.css", scene),
+                verificarCss("/styles/juego.css", scene),
+                verificarCss("/styles/fin.css", scene),
+                verificarCss("/styles/facciones.css", scene)
         );
 
         stage.setScene(scene);
         actualizarVista();
         manejarTurnoEnemigo();
+    }
+
+    private String verificarCss(String ruta, Scene scene){
+        java.net.URL resourceUrl = getClass().getResource(ruta);
+
+        if (resourceUrl != null) {
+            String css = resourceUrl.toExternalForm();
+            scene.getStylesheets().add(css);
+        } else {
+
+            System.err.println("Error: archivo CSS no encontrado!");
+        }
+        return ruta;
     }
 
     private BorderPane crearTablero() {
@@ -294,7 +306,7 @@ public class PantallaJuego {
             if (verificarFinDeRonda()) {
                 sonidos.reproducirFinRound();
             } else {
-                sonidos.reproducirTirarCarta();
+                sonidos.reproducirSonidoCarta(carta);
             }
 
             actualizarJuego();
@@ -370,12 +382,6 @@ public class PantallaJuego {
         return "faccion-" + faccion.name().toLowerCase();
     }
 
-    /**
-     * Detecta si cambió la ronda desde la última vez que se chequeó.
-     * Si cambió, actualiza el número de ronda guardado, resetea el flag
-     * de "enemigo pasó" y devuelve true. No reproduce sonidos: eso lo
-     * decide quien lo llama (así no se pisan con el de tirar carta).
-     */
     private boolean verificarFinDeRonda() {
         int numeroRondaActual = partida.getNumeroRonda();
 
@@ -441,35 +447,25 @@ public class PantallaJuego {
                     new PauseTransition(Duration.seconds(1));
 
             pausa.setOnFinished(event -> {
-                boolean habiaPasado = partida.getEnemigo().yaPaso();
-                int cartasAntes = partida.getEnemigo().getMano().size();
+                Carta cartaJugada = partida.ejecutarTurnoEnemigo();
 
-                partida.ejecutarTurnoEnemigo();
-
-                int cartasDespues = partida.getEnemigo().getMano().size();
-
-                boolean acabaDePasar = !habiaPasado && partida.getEnemigo().yaPaso();
-                if (acabaDePasar) {
+                if (cartaJugada == null) {
                     enemigoPaso = true;
                 }
 
-                // Si cerró la ronda suena fin de ronda (y resetea enemigoPaso);
-                // si no, y jugó una carta, suena el de tirar carta
                 if (verificarFinDeRonda()) {
                     sonidos.reproducirFinRound();
-                } else if (cartasDespues < cartasAntes) {
-                    sonidos.reproducirTirarCarta();
+                } else if (cartaJugada != null) {
+                    sonidos.reproducirSonidoCarta(cartaJugada);
                 }
 
                 actualizarVista();
                 manejarTurnoEnemigo();
             });
 
-
             pausa.play();
         }
     }
-
 
 
     private void actualizarLinea(
@@ -477,7 +473,7 @@ public class PantallaJuego {
             Jugador jugador,
             TipoAtaque tipoAtaque) {
 
-        Label etiqueta = (Label) linea.getChildren().get(0);
+        Label etiqueta = (Label) linea.getChildren().getFirst();
 
         linea.getChildren().clear();
         linea.getChildren().add(etiqueta);
@@ -604,8 +600,8 @@ public class PantallaJuego {
 
         Scene escenaFinal = new Scene(root, 1000, 700);
         escenaFinal.getStylesheets().addAll(
-                getClass().getResource("/styles/styles.css").toExternalForm(),
-                getClass().getResource("/styles/fin.css").toExternalForm()
+                verificarCss("/styles/styles.css", escenaFinal),
+                verificarCss("/styles/fin.css", escenaFinal)
         );
 
         stage.setScene(escenaFinal);

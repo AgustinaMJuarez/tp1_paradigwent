@@ -4,30 +4,51 @@ import javafx.scene.media.AudioClip;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
+import modelo.cartas.Carta;
+import modelo.cartas.Clima;
+import modelo.cartas.Criatura;
+import modelo.cartas.Efecto;
+
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GestorSonido {
+
     private final AudioClip click;
-    private final AudioClip tirarCarta;
     private final AudioClip musicaGanador;
     private final AudioClip musicaPerdedor;
     private final AudioClip finRound;
-    private MediaPlayer musicaFondo;
+
+    private final MediaPlayer musicaFondo;
+
+    private final Map<Class<? extends Carta>, AudioClip> sonidosCartas;
 
     public GestorSonido() {
-        click = new AudioClip(
-                getClass().getResource("/sonidos/clicSelection.wav").toExternalForm()
+
+        click = cargarAudioClip("/sonidos/clicSelection.wav");
+        musicaGanador = cargarAudioClip("/sonidos/win.wav");
+        musicaPerdedor = cargarAudioClip("/sonidos/lose.wav");
+        finRound = cargarAudioClip("/sonidos/endRound.wav");
+
+        sonidosCartas = new HashMap<>();
+
+        sonidosCartas.put(
+                Criatura.class,
+                cargarAudioClip("/sonidos/cardThrown.wav")
         );
 
-        URL musica = getClass().getResource("/sonidos/bienvenida.mp3");
+        sonidosCartas.put(
+                Clima.class,
+                cargarAudioClip("/sonidos/effect.wav")
+        );
 
-        tirarCarta = new AudioClip(getClass().getResource("/sonidos/cardThrown.wav").toExternalForm());
+        sonidosCartas.put(
+                Efecto.class,
+                cargarAudioClip("/sonidos/effect.wav")
+        );
 
-        musicaGanador = new AudioClip(getClass().getResource("/sonidos/win.wav").toExternalForm());
-
-        musicaPerdedor = new AudioClip(getClass().getResource("/sonidos/lose.wav").toExternalForm());
-
-        finRound = new AudioClip(getClass().getResource("/sonidos/endRound.wav").toExternalForm());
+        URL musica = cargarRecurso("/sonidos/bienvenida.mp3");
 
         musicaFondo = new MediaPlayer(
                 new Media(musica.toExternalForm())
@@ -36,21 +57,54 @@ public class GestorSonido {
         musicaFondo.setCycleCount(MediaPlayer.INDEFINITE);
     }
 
+    private AudioClip cargarAudioClip(String ruta) {
+        return new AudioClip(
+                cargarRecurso(ruta).toExternalForm()
+        );
+    }
+
+    private URL cargarRecurso(String ruta) {
+
+        URL recurso = getClass().getResource(ruta);
+
+        if (recurso == null) {
+            throw new IllegalStateException(
+                    "No se encontró el recurso: " + ruta
+            );
+        }
+
+        return recurso;
+    }
+
     public void reproducirClick() {
         click.play();
+    }
+
+    public void reproducirSonidoCarta(Carta carta) {
+
+        AudioClip sonido = sonidosCartas.get(carta.getClass());
+
+        if (sonido != null) {
+            sonido.play();
+        }
+    }
+
+    public void reproducirGanador() {
+        musicaGanador.play();
+    }
+
+    public void reproducirPerdedor() {
+        musicaPerdedor.play();
+    }
+
+    public void reproducirFinRound() {
+        finRound.play();
     }
 
     public void reproducirMusica() {
         musicaFondo.play();
     }
-    
-    public void reproducirTirarCarta() {tirarCarta.play();}
 
-    public void reproducirGanador() {musicaGanador.play();}
-
-    public void reproducirFinRound() {finRound.play();}
-
-    public void reproducirPerdedor() {musicaPerdedor.play();}
     public void pausarMusica() {
         musicaFondo.pause();
     }
