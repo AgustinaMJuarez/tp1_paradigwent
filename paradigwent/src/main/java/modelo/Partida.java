@@ -1,6 +1,9 @@
 package modelo;
 
 import modelo.cartas.Carta;
+import modelo.cartas.Efecto;
+import modelo.cartas.TipoAtaque;
+
 import java.util.Random;
 
 public class Partida {
@@ -84,7 +87,11 @@ public class Partida {
     }
 
     public void jugarCarta(Carta carta) {
-        rondaActual.jugarCarta(carta);
+        jugarCarta(carta, null);
+    }
+
+    public void jugarCarta(Carta carta, TipoAtaque linea) {
+        rondaActual.jugarCarta(carta, linea);
         manejarRondas();
     }
 
@@ -112,4 +119,6 @@ public class Partida {
     public Jugador getEnemigo() {
         return enemigo;
     }
+
+
 }

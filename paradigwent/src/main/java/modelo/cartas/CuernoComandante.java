@@ -8,4 +8,6 @@ public class CuernoComandante implements Habilidad {
     public void aplicar(Jugador jugador, Tablero tablero, Jugador jugadorObjetivo,TipoAtaque tipoAtaque) {
         tablero.agregarCuerno(jugadorObjetivo, tipoAtaque);
     }
+
+    @Override public boolean requiereLinea() { return true; }
 }

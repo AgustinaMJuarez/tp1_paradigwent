@@ -38,15 +38,15 @@ public class Ronda {
         }
     }
 
-    public void jugarCarta(Carta carta){
-        jugadorActual.jugarCarta(carta, tablero);
+    public void jugarCarta(Carta carta) {
+        jugarCarta(carta, null);
+    }
+
+    public void jugarCarta(Carta carta, TipoAtaque linea) {
+        jugadorActual.jugarCarta(carta, tablero, linea);
         cambiarJugador();
     }
 
-    public void jugarEfecto(Efecto efecto, Jugador jugadorObjetivo, TipoAtaque tipoAtaque) {
-        jugadorActual.jugarEfecto(efecto, tablero, jugadorObjetivo, tipoAtaque);
-        cambiarJugador();
-    }
 
     public void pasar() {
         jugadorActual.pasarTurno();
