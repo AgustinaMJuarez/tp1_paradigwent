@@ -2,6 +2,7 @@ package modelo;
 
 import modelo.cartas.Carta;
 import modelo.cartas.Criatura;
+import modelo.cartas.TipoAtaque;
 
 public class Automata {
     private final Jugador jugador;
@@ -51,7 +52,11 @@ public class Automata {
         Carta carta = elegirCarta();
 
         if (carta != null) {
-            partida.jugarCarta(carta);
+            if (carta.requiereLinea()) {
+                partida.jugarCarta(carta, elegirLinea());
+            } else {
+                partida.jugarCarta(carta);
+            }
         } else {
             partida.pasarTurno();
         }
@@ -63,5 +68,22 @@ public class Automata {
         }
 
         return jugador.getMano().get(0);
+    }
+
+    private TipoAtaque elegirLinea() {
+        TipoAtaque mejor = TipoAtaque.CUERPO_A_CUERPO;
+        int fuerzaMejor = -1;
+
+        for (TipoAtaque tipo : TipoAtaque.values()) {
+            int fuerzaLinea = 0;
+            for (Criatura criatura : jugador.getCriaturasEnLinea(tipo)) {
+                fuerzaLinea += criatura.getFuerza();
+            }
+            if (fuerzaLinea > fuerzaMejor) {
+                fuerzaMejor = fuerzaLinea;
+                mejor = tipo;
+            }
+        }
+        return mejor;
     }
 }

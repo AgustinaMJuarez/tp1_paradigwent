@@ -8,4 +8,6 @@ public class Quemadura implements Habilidad {
     public void aplicar(Jugador jugador, Tablero tablero, Jugador jugadorObjetivo, TipoAtaque tipoAtaque) {
         tablero.aplicarQuemadura();
     }
+
+    @Override public boolean requiereLinea() { return false; }
 }

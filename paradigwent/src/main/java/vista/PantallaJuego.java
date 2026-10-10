@@ -12,6 +12,8 @@ import javafx.util.Duration;
 import modelo.*;
 import modelo.cartas.*;
 
+import java.util.Optional;
+
 public class PantallaJuego {
 
     private final Stage stage;
@@ -288,9 +290,16 @@ public class PantallaJuego {
         );
 
         nombreCarta.setOnAction(event -> {
-            partida.jugarCarta(carta);
+            if (carta.requiereLinea()) {
+                Optional<TipoAtaque> linea = elegirLinea();
+                if (linea.isEmpty()) {
+                    return;
+                }
+                partida.jugarCarta(carta, linea.get());
+            } else {
+                partida.jugarCarta(carta);
+            }
 
-            // Si la jugada cerró la ronda suena fin de ronda, si no, el de tirar carta
             if (verificarFinDeRonda()) {
                 sonidos.reproducirFinRound();
             } else {
@@ -301,6 +310,14 @@ public class PantallaJuego {
         });
 
         return nombreCarta;
+    }
+
+    private Optional<TipoAtaque> elegirLinea() {
+        ChoiceDialog<TipoAtaque> dialogo =
+                new ChoiceDialog<>(TipoAtaque.CUERPO_A_CUERPO, TipoAtaque.values());
+        dialogo.setTitle("Efecto");
+        dialogo.setHeaderText("Elegí la línea");
+        return dialogo.showAndWait();
     }
 
     private HBox crearControles() {

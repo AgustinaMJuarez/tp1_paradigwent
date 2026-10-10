@@ -12,17 +12,18 @@ public class Efecto extends Carta{
     }
 
     @Override
-    public void jugar(Jugador jugador, Tablero tablero) {
-        // ...
+    public boolean requiereLinea() {
+        return habilidad.requiereLinea();
     }
-    public void jugar(
-            Jugador jugador,
-            Tablero tablero,
-            Jugador jugadorObjetivo,
-            TipoAtaque tipoAtaque) {
 
+    @Override
+    public void jugar(Jugador jugador, Tablero tablero) {
+        jugar(jugador, tablero, null);
+    }
+
+    @Override
+    public void jugar(Jugador jugador, Tablero tablero, TipoAtaque linea) {
         tablero.agregarEfecto(jugador, this);
-
-        habilidad.aplicar(jugador,tablero,jugadorObjetivo,tipoAtaque);
+        habilidad.aplicar(jugador, tablero, jugador, linea);
     }
 }

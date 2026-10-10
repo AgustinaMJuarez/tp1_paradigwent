@@ -49,11 +49,15 @@ public class Jugador {
     }
 
     public void jugarCarta(Carta carta, Tablero tablero) {
+        jugarCarta(carta, tablero, null);
+    }
+
+    public void jugarCarta(Carta carta, Tablero tablero, TipoAtaque linea) {
         if (!tieneCarta(carta)) {
             return;
         }
         mano.remove(carta);
-        carta.jugar(this, tablero);
+        carta.jugar(this, tablero, linea);
     }
 
 
@@ -64,20 +68,6 @@ public class Jugador {
                         k -> new ArrayList<>()
                 )
                 .add(criatura);
-    }
-
-    public void jugarEfecto(
-            Efecto efecto,
-            Tablero tablero,
-            Jugador jugadorObjetivo,
-            TipoAtaque tipoAtaque) {
-
-        if (!tieneCarta(efecto)) {
-            return;
-        }
-
-        mano.remove(efecto);
-        efecto.jugar(this, tablero, jugadorObjetivo, tipoAtaque);
     }
 
 

@@ -16,4 +16,12 @@ public abstract class Carta {
 
     public abstract void jugar(Jugador jugador, Tablero tablero);
 
+    public boolean requiereLinea() {
+        return false;
+    }
+
+    public void jugar(Jugador jugador, Tablero tablero, TipoAtaque linea) {
+        jugar(jugador, tablero);
+    }
+
 }
