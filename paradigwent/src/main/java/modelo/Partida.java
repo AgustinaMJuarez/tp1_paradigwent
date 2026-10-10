@@ -1,7 +1,6 @@
 package modelo;
 
 import modelo.cartas.Carta;
-import modelo.cartas.Efecto;
 import modelo.cartas.TipoAtaque;
 
 import java.util.Random;

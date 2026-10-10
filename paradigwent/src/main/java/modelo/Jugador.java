@@ -21,7 +21,6 @@ public class Jugador {
         this.paso = false;
     }
 
-
     public List<Criatura> getCriaturasEnLinea(TipoAtaque tipoAtaque) {
         return Collections.unmodifiableList(
                 lineas.getOrDefault(tipoAtaque, Collections.emptyList())
@@ -60,7 +59,6 @@ public class Jugador {
         carta.jugar(this, tablero, linea);
     }
 
-
     public void agregarCriatura(Criatura criatura) {
         lineas
                 .computeIfAbsent(
@@ -69,7 +67,6 @@ public class Jugador {
                 )
                 .add(criatura);
     }
-
 
     public void perderVida() {
         this.vidas -= 1;
@@ -105,7 +102,6 @@ public class Jugador {
     public boolean yaPaso() {
         return paso;
     }
-
 
     public void repartirMano() {
         for (int i =0; i < 10; i++) {

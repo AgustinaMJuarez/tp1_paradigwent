@@ -69,7 +69,7 @@ public class Automata {
             return null;
         }
 
-        return jugador.getMano().get(0);
+        return jugador.getMano().getFirst();
     }
 
     private TipoAtaque elegirLinea() {

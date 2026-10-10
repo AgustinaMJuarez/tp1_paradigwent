@@ -7,8 +7,8 @@ import java.util.Collections;
 import java.util.List;
 
 public class Mazo {
-    private Faccion faccion;
-    private List<Carta> cartas;
+    private final Faccion faccion;
+    private final List<Carta> cartas;
 
     public Mazo(Faccion faccion, List<Carta> cartas) {
         this.faccion = faccion;
@@ -20,15 +20,11 @@ public class Mazo {
             return null;
         }
 
-        return cartas.remove(0);
+        return cartas.removeFirst();
     }
 
     public void sortearMazo() {
         Collections.shuffle(cartas);
-    }
-
-    public int cantidadCartas() {
-        return cartas.size();
     }
 
     public List<Carta> getCartas() {

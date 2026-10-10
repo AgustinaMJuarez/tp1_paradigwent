@@ -33,7 +33,4 @@ public class Criatura extends Carta{
         jugador.agregarCriatura(this);
 
     }
-
-    public boolean tieneHabilidad() { return habilidad != null;}
-
 }

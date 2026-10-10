@@ -11,10 +11,6 @@ public class Clima extends Carta{
         this.tipoClima = tipoClima;
     }
 
-    public TipoClima getTipoClima() {
-        return tipoClima;
-    }
-
     public boolean afecta(TipoAtaque ataque) {
         if (tipoClima == TipoClima.ESCARCHA && ataque == TipoAtaque.CUERPO_A_CUERPO) {
             return true;
