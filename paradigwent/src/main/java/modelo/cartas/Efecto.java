@@ -4,11 +4,11 @@ import modelo.Jugador;
 import modelo.Tablero;
 
 public class Efecto extends Carta{
-    private final TipoEfecto tipoEfecto;
+    private final Habilidad habilidad;
 
-    public Efecto(String nombre, TipoEfecto tipoEfecto) {
+    public Efecto(String nombre, Habilidad habilidad) {
         super(nombre);
-        this.tipoEfecto = tipoEfecto;
+        this.habilidad = habilidad;
     }
 
     @Override
@@ -23,12 +23,6 @@ public class Efecto extends Carta{
 
         tablero.agregarEfecto(jugador, this);
 
-        if (tipoEfecto == TipoEfecto.CUERNO_DE_COMANDANTE) {
-            tablero.agregarCuerno(jugadorObjetivo, tipoAtaque);
-        }
-
-        if (tipoEfecto == TipoEfecto.QUEMADURA) {
-            tablero.aplicarQuemadura();
-        }
+        habilidad.aplicar(jugador,tablero,jugadorObjetivo,tipoAtaque);
     }
 }

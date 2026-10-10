@@ -13,7 +13,7 @@ public class Jugador {
     private boolean paso;
 
     public Jugador(Mazo mazo) {
-        this.vidas = 3;
+        this.vidas = 2;
         this.mazo = mazo;
         this.mano = new ArrayList<Carta>();
         this.pilaDescarte = new ArrayList<Carta>();

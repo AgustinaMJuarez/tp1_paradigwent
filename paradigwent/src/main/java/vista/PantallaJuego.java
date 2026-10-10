@@ -39,6 +39,8 @@ public class PantallaJuego {
     private HBox distanciaJugador;
     private HBox cuerpoJugador;
 
+    private static final String VIDAS_INICIALES = "♥ ♥";
+
     public PantallaJuego(Stage stage, Partida partida, Jugador jugador, GestorSonido sonidos) {
         this.stage = stage;
         this.partida = partida;
@@ -98,7 +100,7 @@ public class PantallaJuego {
         Label nombre = new Label("ENEMIGO");
         nombre.getStyleClass().add("nombre-jugador");
 
-        vidasEnemigoLabel = new Label("♥ ♥ ♥");
+        vidasEnemigoLabel = new Label(VIDAS_INICIALES);
         vidasEnemigoLabel.getStyleClass().add("vidas");
 
         fuerzaEnemigoLabel = new Label("Fuerza: 0");
@@ -128,7 +130,7 @@ public class PantallaJuego {
         Label nombre = new Label("JUGADOR");
         nombre.getStyleClass().add("nombre-jugador");
 
-        vidasJugadorLabel = new Label("♥ ♥ ♥");
+        vidasJugadorLabel = new Label(VIDAS_INICIALES);
         vidasJugadorLabel.getStyleClass().add("vidas");
 
         fuerzaJugadorLabel = new Label("Fuerza: 0");
