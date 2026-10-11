@@ -22,7 +22,6 @@ public class Ronda {
         return jugadorActual;
     }
 
-
     private void cambiarJugador() {
         Jugador siguiente;
 
@@ -46,7 +45,6 @@ public class Ronda {
         cambiarJugador();
     }
 
-
     public void pasar() {
         jugadorActual.pasarTurno();
         cambiarJugador();
@@ -55,7 +53,6 @@ public class Ronda {
     public boolean estaTerminada() {
         return jugador.yaPaso() && enemigo.yaPaso();
     }
-
 
     public Jugador determinarGanador(){
         int fuerzaJugador = jugador.calcularFuerza(tablero);
@@ -97,8 +94,6 @@ public class Ronda {
 
         finalizada = true;
     }
-
-
 
 }
 

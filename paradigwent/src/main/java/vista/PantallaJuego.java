@@ -18,6 +18,7 @@ import modelo.cartas.*;
 
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PantallaJuego {
 
@@ -46,6 +47,7 @@ public class PantallaJuego {
     private HBox asedioJugador;
     private HBox distanciaJugador;
     private HBox cuerpoJugador;
+
 
     private static final String VIDAS_INICIALES = "♥ ♥";
 
@@ -326,10 +328,6 @@ public class PantallaJuego {
     private Optional<TipoAtaque> elegirLinea(Carta carta) {
 
         Stage dialogo = new Stage();
-        dialogo.initOwner(stage);
-        dialogo.initModality(Modality.APPLICATION_MODAL);
-        dialogo.initStyle(StageStyle.TRANSPARENT);
-
         AtomicReference<TipoAtaque> elegida = new AtomicReference<>();
 
         Label titulo = new Label("ELEGÍ LA LÍNEA");
@@ -366,27 +364,7 @@ public class PantallaJuego {
         cancelar.setOnAction(event -> dialogo.close());
         contenido.getChildren().add(cancelar);
 
-        StackPane raiz = new StackPane(contenido);
-        raiz.getStyleClass().add("dialogo-efecto");
-
-        Scene escena = new Scene(raiz);
-        escena.setFill(Color.TRANSPARENT);
-        escena.getStylesheets().add(
-                getClass().getResource("/styles/efecto.css").toExternalForm()
-        );
-
-        escena.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.ESCAPE) {
-                dialogo.close();
-            }
-        });
-
-        dialogo.setOnShown(event -> {
-            dialogo.setX(stage.getX() + (stage.getWidth() - dialogo.getWidth()) / 2);
-            dialogo.setY(stage.getY() + (stage.getHeight() - dialogo.getHeight()) / 2);
-        });
-
-        dialogo.setScene(escena);
+        configurarModal(dialogo, contenido);
         dialogo.showAndWait();
 
         return Optional.ofNullable(elegida.get());
@@ -423,6 +401,9 @@ public class PantallaJuego {
 
         rendirse.setOnAction(event -> {
             sonidos.reproducirClick();
+            if (!confirmarRendicion()) {
+                return;
+            }
             jugadorVista.rendirse();
 
             if (verificarFinDeRonda()) {
@@ -691,4 +672,67 @@ public class PantallaJuego {
         stage.setScene(escenaFinal);
     }
 
+    private void configurarModal(Stage modal, VBox contenido) {
+        modal.initOwner(stage);
+        modal.initModality(Modality.APPLICATION_MODAL);
+        modal.initStyle(StageStyle.TRANSPARENT);
+
+        StackPane raiz = new StackPane(contenido);
+        raiz.getStyleClass().add("dialogo-efecto");
+
+        Scene escena = new Scene(raiz);
+        escena.setFill(Color.TRANSPARENT);
+        escena.getStylesheets().add(
+                getClass().getResource("/styles/efecto.css").toExternalForm()
+        );
+
+        escena.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.ESCAPE) {
+                modal.close();
+            }
+        });
+
+        modal.setOnShown(event -> {
+            modal.setX(stage.getX() + (stage.getWidth() - modal.getWidth()) / 2);
+            modal.setY(stage.getY() + (stage.getHeight() - modal.getHeight()) / 2);
+        });
+
+        modal.setScene(escena);
+    }
+
+    private boolean confirmarRendicion() {
+
+        Stage dialogo = new Stage();
+        AtomicBoolean confirmado = new AtomicBoolean(false);
+
+        Label titulo = new Label("¿RENDIRTE?");
+        titulo.getStyleClass().addAll("titulo-efecto", "titulo-alerta");
+
+        Label texto = new Label("¿Estás seguro? Esta acción no se puede deshacer.");
+        texto.getStyleClass().add("texto-efecto");
+
+        Button cancelar = new Button("CANCELAR");
+        cancelar.getStyleClass().addAll("boton-linea", "boton-mitad");
+        cancelar.setDefaultButton(true);
+        cancelar.setOnAction(event -> dialogo.close());
+
+        Button rendirse = new Button("RENDIRSE");
+        rendirse.getStyleClass().addAll("boton-linea", "boton-mitad", "boton-peligro");
+        rendirse.setOnAction(event -> {
+            confirmado.set(true);
+            dialogo.close();
+        });
+
+        HBox botones = new HBox(14, cancelar, rendirse);
+        botones.setAlignment(Pos.CENTER);
+
+        VBox contenido = new VBox(14, titulo, texto, botones);
+        contenido.setAlignment(Pos.CENTER);
+        contenido.getStyleClass().addAll("panel-efecto", "panel-alerta");
+
+        configurarModal(dialogo, contenido);
+        dialogo.showAndWait();
+
+        return confirmado.get();
+    }
 }

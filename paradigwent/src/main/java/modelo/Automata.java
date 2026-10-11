@@ -43,7 +43,6 @@ public class Automata {
         return fuerzaAutomata >= 8 && fuerzaOponente >= fuerzaAutomata + 8;
     }
 
-
     public Carta jugarTurno(Partida partida) {
         if (convienePasar(partida)) {
             partida.pasarTurno();

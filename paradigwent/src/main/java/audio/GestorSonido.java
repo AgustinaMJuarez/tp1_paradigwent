@@ -22,6 +22,9 @@ public class GestorSonido {
 
     private final MediaPlayer musicaFondo;
 
+    private static final double VOLUMEN_PERDEDOR = 0.5;
+    private static final double VOLUMEN_FONDO = 0.25;
+
     private final Map<Class<? extends Carta>, AudioClip> sonidosCartas;
 
     public GestorSonido() {
@@ -30,6 +33,8 @@ public class GestorSonido {
         musicaGanador = cargarAudioClip("/sonidos/win.wav");
         musicaPerdedor = cargarAudioClip("/sonidos/lose.wav");
         finRound = cargarAudioClip("/sonidos/endRound.wav");
+
+        musicaPerdedor.setVolume(VOLUMEN_PERDEDOR);
 
         sonidosCartas = new HashMap<>();
 
@@ -53,6 +58,8 @@ public class GestorSonido {
         musicaFondo = new MediaPlayer(
                 new Media(musica.toExternalForm())
         );
+
+        musicaFondo.setVolume(VOLUMEN_FONDO);
 
         musicaFondo.setCycleCount(MediaPlayer.INDEFINITE);
     }
