@@ -146,6 +146,12 @@ public class App extends Application {
         mazoJugador.sortearMazo();
         mazoAutomata.sortearMazo();
 
+        PantallaJuego pantallaJuego = getPantallaJuego(stage, mazoJugador, mazoAutomata);
+
+        pantallaJuego.mostrar();
+    }
+
+    private PantallaJuego getPantallaJuego(Stage stage, Mazo mazoJugador, Mazo mazoAutomata) {
         Jugador jugador =  new Jugador(mazoJugador);
         Jugador jugadorAutomata = new Jugador(mazoAutomata);
 
@@ -167,8 +173,7 @@ public class App extends Application {
                         jugador,
                         sonidos
                 );
-
-        pantallaJuego.mostrar();
+        return pantallaJuego;
     }
 
     private void agregarAnimacionHover(Button boton) {
