@@ -5,6 +5,9 @@ import modelo.cartas.*;
 import java.util.*;
 
 public class Jugador {
+    private static final int VIDAS = 2;
+    private static final int VIDA_PERDIDA = 1;
+    private static final int SIN_VIDAS = 0;
     private int vidas;
     private final Mazo mazo;
     private final List<Carta> mano;
@@ -13,7 +16,7 @@ public class Jugador {
     private boolean paso;
 
     public Jugador(Mazo mazo) {
-        this.vidas = 2;
+        this.vidas = VIDAS;
         this.mazo = mazo;
         this.mano = new ArrayList<Carta>();
         this.pilaDescarte = new ArrayList<Carta>();
@@ -69,11 +72,11 @@ public class Jugador {
     }
 
     public void perderVida() {
-        this.vidas -= 1;
+        this.vidas -= VIDA_PERDIDA;
     }
 
     public boolean estaDerrotado() {
-        return this.vidas == 0;
+        return this.vidas == SIN_VIDAS;
     }
 
     public void descartarCarta(Carta carta) {
@@ -92,7 +95,7 @@ public class Jugador {
     }
 
     public void rendirse() {
-        vidas = 0;
+        vidas = SIN_VIDAS;
     }
 
     public void resetearPaso() {
