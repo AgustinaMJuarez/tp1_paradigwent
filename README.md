@@ -24,6 +24,9 @@
 
 ---
 
+## Audiovisual
+Agustina Juarez : https://youtu.be/epA6eEgZPgg
+
 ## Descripción del proyecto
 
 Paradigwent es un juego de cartas por turnos desarrollado en Java como trabajo práctico de la materia Paradigmas de Programación. El juego permite enfrentarse a un oponente controlado por la computadora, utilizando cartas de criaturas, efectos y clima.
