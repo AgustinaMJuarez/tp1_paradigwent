@@ -26,6 +26,7 @@
 
 ## Audiovisual
 Agustina Juarez : https://youtu.be/epA6eEgZPgg
+Felicitas Mannarino : https://youtu.be/PsWchRySiFc
 
 ## Descripción del proyecto
 
