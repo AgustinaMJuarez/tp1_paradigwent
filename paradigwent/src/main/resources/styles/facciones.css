@@ -1,0 +1,59 @@
+.carta.faccion-playa {
+    -fx-background-color: linear-gradient(to bottom, rgba(24, 92, 112, 0.95), rgba(14, 48, 72, 0.95));
+    -fx-border-color: #4dd0e1;
+}
+
+.carta.faccion-playa:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(36, 124, 146, 0.97), rgba(20, 64, 92, 0.97));
+    -fx-border-color: #a8ecf5;
+    -fx-effect: dropshadow(gaussian, rgba(77, 208, 225, 0.60), 14, 0.30, 0, 0);
+}
+
+.criatura.faccion-playa {
+    -fx-background-color: rgba(77, 208, 225, 0.14);
+    -fx-border-color: rgba(77, 208, 225, 0.60);
+}
+
+.informacion-jugador.faccion-playa {
+    -fx-border-color: rgba(77, 208, 225, 0.55);
+}
+
+.carta.faccion-bosque {
+    -fx-background-color: linear-gradient(to bottom, rgba(52, 98, 40, 0.95), rgba(24, 52, 36, 0.95));
+    -fx-border-color: #8bd45f;
+}
+
+.carta.faccion-bosque:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(72, 130, 54, 0.97), rgba(32, 68, 44, 0.97));
+    -fx-border-color: #c8ecaa;
+    -fx-effect: dropshadow(gaussian, rgba(139, 212, 95, 0.60), 14, 0.30, 0, 0);
+}
+
+.criatura.faccion-bosque {
+    -fx-background-color: rgba(139, 212, 95, 0.14);
+    -fx-border-color: rgba(139, 212, 95, 0.60);
+}
+
+.informacion-jugador.faccion-bosque {
+    -fx-border-color: rgba(139, 212, 95, 0.55);
+}
+
+.carta.faccion-constitucion {
+    -fx-background-color: linear-gradient(to bottom, rgba(138, 58, 44, 0.95), rgba(70, 28, 36, 0.95));
+    -fx-border-color: #ff8f70;
+}
+
+.carta.faccion-constitucion:hover {
+    -fx-background-color: linear-gradient(to bottom, rgba(176, 78, 58, 0.97), rgba(92, 38, 44, 0.97));
+    -fx-border-color: #ffc2ae;
+    -fx-effect: dropshadow(gaussian, rgba(255, 143, 112, 0.60), 14, 0.30, 0, 0);
+}
+
+.criatura.faccion-constitucion {
+    -fx-background-color: rgba(255, 143, 112, 0.14);
+    -fx-border-color: rgba(255, 143, 112, 0.60);
+}
+
+.informacion-jugador.faccion-constitucion {
+    -fx-border-color: rgba(255, 143, 112, 0.55);
+}

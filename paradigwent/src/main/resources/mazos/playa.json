@@ -1,0 +1,187 @@
+{
+  "faccion": "PLAYA",
+  "cartas": [
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Marinero",
+      "fuerza": 3,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Corsario",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Espadachin Pirata",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Contramaestre",
+      "fuerza": 6,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Saqueador Costero",
+      "fuerza": 4,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guerrero del Arrecife",
+      "fuerza": 6,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Bucanero",
+      "fuerza": 5,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Guardian del Puerto",
+      "fuerza": 7,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Capitan Pirata",
+      "fuerza": 8,
+      "tipoAtaque": "CUERPO_A_CUERPO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Arponero",
+      "fuerza": 4,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Tirador de Cubierta",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Ballestero Naval",
+      "fuerza": 5,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Sirena",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Vigia del Mastil",
+      "fuerza": 3,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Mago de las Mareas",
+      "fuerza": 7,
+      "tipoAtaque": "DISTANCIA"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Cazador de Sirenas",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Canon de Cubierta",
+      "fuerza": 6,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Ballesta Naval",
+      "fuerza": 5,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Catapulta Pirata",
+      "fuerza": 7,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Bombarda Costera",
+      "fuerza": 8,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Lanzarredes Pesado",
+      "fuerza": 4,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Canon Doble",
+      "fuerza": 8,
+      "tipoAtaque": "ASEDIO"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Navio de Guerra",
+      "fuerza": 9,
+      "habilidad": "ASEDIO"
+    },
+
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Almirante de la Marea",
+      "fuerza": 6,
+      "tipoAtaque": "DISTANCIA",
+      "habilidad": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "CRIATURA",
+      "nombre": "Kraken",
+      "fuerza": 10,
+      "tipoAtaque": "CUERPO_A_CUERPO",
+      "efectoEspecial": "QUEMADURA"
+    },
+
+    {
+      "tipo": "CLIMA",
+      "nombre": "Helada del Oceano",
+      "tipoClima": "ESCARCHA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Niebla Marina",
+      "tipoClima": "NIEBLA"
+    },
+    {
+      "tipo": "CLIMA",
+      "nombre": "Tormenta Tropical",
+      "tipoClima": "LLUVIA"
+    },
+
+    {
+      "tipo": "EFECTO",
+      "nombre": "Orden del Capitan",
+      "tipoEfecto": "CUERNO_DE_COMANDANTE"
+    },
+    {
+      "tipo": "EFECTO",
+      "nombre": "Fuego de Canon",
+      "tipoEfecto": "QUEMADURA"
+    }
+  ]
+}
