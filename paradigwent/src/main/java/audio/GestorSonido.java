@@ -23,7 +23,7 @@ public class GestorSonido {
     private final MediaPlayer musicaFondo;
 
     private static final double VOLUMEN_PERDEDOR = 0.5;
-    private static final double VOLUMEN_FONDO = 0;
+    private static final double VOLUMEN_FONDO = 0.25;
 
     private final Map<Class<? extends Carta>, AudioClip> sonidosCartas;
 
